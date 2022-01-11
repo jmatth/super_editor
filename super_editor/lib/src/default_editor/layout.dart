@@ -8,6 +8,8 @@ import 'package:super_editor/src/infrastructure/_logging.dart';
 
 final _log = Logger(scope: 'DocumentLayout');
 
+Widget? _emptySeparatorBuilder(int index) => null;
+
 /// Displays a `Document` as a single column.
 ///
 /// `DefaultDocumentLayout` displays a visual "component" for each
@@ -28,6 +30,7 @@ class DefaultDocumentLayout extends StatefulWidget {
     required this.componentBuilders,
     this.margin = EdgeInsets.zero,
     this.componentVerticalSpacing = 16,
+    this.componentSeparatorBuilder = _emptySeparatorBuilder,
     this.extensions = const {},
     this.showDebugPaint = false,
   }) : super(key: key);
@@ -55,6 +58,8 @@ class DefaultDocumentLayout extends StatefulWidget {
 
   /// The space between sequential components.
   final double componentVerticalSpacing;
+
+  final Widget? Function(int) componentSeparatorBuilder;
 
   /// Tools that components might use to build themselves.
   ///
@@ -400,12 +405,15 @@ class _DefaultDocumentLayoutState extends State<DefaultDocumentLayout> implement
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (final docComponent in docComponents) ...[
+        children: docComponents.asMap().entries.expand((entry) {
+          final index = entry.key + 1;
+          final docComponent = entry.value;
+
+          return [
             docComponent,
-            SizedBox(height: widget.componentVerticalSpacing),
-          ],
-        ],
+            SizedBox(height: widget.componentVerticalSpacing, child: widget.componentSeparatorBuilder(index))
+          ];
+        }).toList(),
       ),
     );
   }

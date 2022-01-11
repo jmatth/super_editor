@@ -44,12 +44,14 @@ abstract class DocumentLayout {
 
   /// Returns a [Rect] that bounds the content selected between
   /// [basePosition] and [extentPosition].
-  Rect? getRectForSelection(DocumentPosition basePosition, DocumentPosition extentPosition);
+  Rect? getRectForSelection(
+      DocumentPosition basePosition, DocumentPosition extentPosition);
 
   /// Returns a [DocumentSelection] that begins near [baseOffset] and extends
   /// to [extentOffset], or [null] if no document content sits between the
   /// provided points.
-  DocumentSelection? getDocumentSelectionInRegion(Offset baseOffset, Offset extentOffset);
+  DocumentSelection? getDocumentSelectionInRegion(
+      Offset baseOffset, Offset extentOffset);
 
   /// Returns the [MouseCursor] that's desired by the component at [documentOffset], or
   /// [null] if the document has no preference for the [MouseCursor] at the given
@@ -62,11 +64,13 @@ abstract class DocumentLayout {
 
   /// Converts [ancestorOffset] from the [ancestor]'s coordinate space to the
   /// same location on the screen within this [DocumentLayout]'s coordinate space.
-  Offset getDocumentOffsetFromAncestorOffset(Offset ancestorOffset, RenderObject ancestor);
+  Offset getDocumentOffsetFromAncestorOffset(
+      Offset ancestorOffset, RenderObject ancestor);
 
   /// Converts [documentOffset] from this [DocumentLayout]'s coordinate space
   /// to the same location on the screen within the [ancestor]'s coordinate space.
-  Offset getAncestorOffsetFromDocumentOffset(Offset documentOffset, RenderObject ancestor);
+  Offset getAncestorOffsetFromDocumentOffset(
+      Offset documentOffset, RenderObject ancestor);
 
   /// Converts [documentOffset] from this [DocumentLayout]'s coordinate space
   /// to the same location on the screen in the global coordinate space.
@@ -121,7 +125,8 @@ mixin DocumentComponent<T extends StatefulWidget> on State<T> {
   ///
   /// See [Document] for more information about [DocumentNode]s and
   /// node positions.
-  Rect getRectForSelection(NodePosition baseNodePosition, NodePosition extentNodePosition);
+  Rect getRectForSelection(
+      NodePosition baseNodePosition, NodePosition extentNodePosition);
 
   /// Returns the node position that represents the "beginning" of
   /// the content within this component, such as the first character
@@ -153,7 +158,8 @@ mixin DocumentComponent<T extends StatefulWidget> on State<T> {
   /// Returns [null] if there is nowhere to move left within this
   /// component, such as when the [currentPosition] is the first
   /// character within a paragraph.
-  NodePosition? movePositionLeft(NodePosition currentPosition, [Set<MovementModifier>? movementModifiers]);
+  NodePosition? movePositionLeft(NodePosition currentPosition,
+      [Set<MovementModifier>? movementModifiers]);
 
   /// Returns a new position within this component's node that
   /// corresponds to the [currentPosition] moved right one unit,
@@ -169,7 +175,8 @@ mixin DocumentComponent<T extends StatefulWidget> on State<T> {
   /// Returns null if there is nowhere to move right within this
   /// component, such as when the [currentPosition] refers to the
   /// last character in a paragraph.
-  NodePosition? movePositionRight(NodePosition currentPosition, [Set<MovementModifier>? movementModifiers]);
+  NodePosition? movePositionRight(NodePosition currentPosition,
+      [Set<MovementModifier>? movementModifiers]);
 
   /// Returns a new position within this component's node that
   /// corresponds to the [currentPosition] moved up one unit,
@@ -217,7 +224,8 @@ mixin DocumentComponent<T extends StatefulWidget> on State<T> {
   ///
   /// The selection type depends on the type of [DocumentNode] that this
   /// component displays.
-  NodeSelection? getSelectionInRange(Offset localBaseOffset, Offset localExtentOffset);
+  NodeSelection? getSelectionInRange(
+      Offset localBaseOffset, Offset localExtentOffset);
 
   /// Returns a [NodeSelection] within this component's [DocumentNode] that
   /// is collapsed at the given [nodePosition]
@@ -269,7 +277,8 @@ mixin DocumentComponent<T extends StatefulWidget> on State<T> {
 /// to the component that's being wrapped. The only thing that the implementer needs
 /// to provide is [childDocumentComponentKey], which is a `GlobalKey` that provides
 /// access to the child [DocumentComponent].
-mixin ProxyDocumentComponent<T extends StatefulWidget> implements DocumentComponent<T> {
+mixin ProxyDocumentComponent<T extends StatefulWidget>
+    implements DocumentComponent<T> {
   DocumentComponent get childDocumentComponentKey;
 
   @override
@@ -288,8 +297,10 @@ mixin ProxyDocumentComponent<T extends StatefulWidget> implements DocumentCompon
   }
 
   @override
-  Rect getRectForSelection(NodePosition baseNodePosition, NodePosition extentNodePosition) {
-    return childDocumentComponentKey.getRectForSelection(baseNodePosition, extentNodePosition);
+  Rect getRectForSelection(
+      NodePosition baseNodePosition, NodePosition extentNodePosition) {
+    return childDocumentComponentKey.getRectForSelection(
+        baseNodePosition, extentNodePosition);
   }
 
   @override
@@ -303,13 +314,17 @@ mixin ProxyDocumentComponent<T extends StatefulWidget> implements DocumentCompon
   }
 
   @override
-  NodePosition? movePositionLeft(NodePosition currentPosition, [Set<MovementModifier>? movementModifiers]) {
-    return childDocumentComponentKey.movePositionLeft(currentPosition, movementModifiers);
+  NodePosition? movePositionLeft(NodePosition currentPosition,
+      [Set<MovementModifier>? movementModifiers]) {
+    return childDocumentComponentKey.movePositionLeft(
+        currentPosition, movementModifiers);
   }
 
   @override
-  NodePosition? movePositionRight(NodePosition currentPosition, [Set<MovementModifier>? movementModifiers]) {
-    return childDocumentComponentKey.movePositionRight(currentPosition, movementModifiers);
+  NodePosition? movePositionRight(NodePosition currentPosition,
+      [Set<MovementModifier>? movementModifiers]) {
+    return childDocumentComponentKey.movePositionRight(
+        currentPosition, movementModifiers);
   }
 
   @override
@@ -333,8 +348,10 @@ mixin ProxyDocumentComponent<T extends StatefulWidget> implements DocumentCompon
   }
 
   @override
-  NodeSelection? getSelectionInRange(Offset localBaseOffset, Offset localExtentOffset) {
-    return childDocumentComponentKey.getSelectionInRange(localBaseOffset, localExtentOffset);
+  NodeSelection? getSelectionInRange(
+      Offset localBaseOffset, Offset localExtentOffset) {
+    return childDocumentComponentKey.getSelectionInRange(
+        localBaseOffset, localExtentOffset);
   }
 
   @override
@@ -347,7 +364,8 @@ mixin ProxyDocumentComponent<T extends StatefulWidget> implements DocumentCompon
     required NodePosition basePosition,
     required NodePosition extentPosition,
   }) {
-    return childDocumentComponentKey.getSelectionBetween(basePosition: basePosition, extentPosition: extentPosition);
+    return childDocumentComponentKey.getSelectionBetween(
+        basePosition: basePosition, extentPosition: extentPosition);
   }
 
   @override
@@ -356,7 +374,8 @@ mixin ProxyDocumentComponent<T extends StatefulWidget> implements DocumentCompon
   }
 
   @override
-  bool isVisualSelectionSupported() => childDocumentComponentKey.isVisualSelectionSupported();
+  bool isVisualSelectionSupported() =>
+      childDocumentComponentKey.isVisualSelectionSupported();
 
   @override
   MouseCursor? getDesiredCursorAtOffset(Offset localOffset) {
@@ -402,7 +421,10 @@ class MovementModifier {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is MovementModifier && runtimeType == other.runtimeType && id == other.id;
+      identical(this, other) ||
+      other is MovementModifier &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;
@@ -475,4 +497,15 @@ class ComponentContext {
   /// May contain additional information needed to build the
   /// component, based on the specific type of the [documentNode].
   final Map<String, dynamic> extensions;
+
+  ComponentContext withRandomKey() => ComponentContext(
+        context: context,
+        document: document,
+        documentSelection: documentSelection,
+        documentNode: documentNode,
+        componentKey: GlobalKey(),
+        showCaret: showCaret,
+        nodeSelection: nodeSelection,
+        extensions: extensions,
+      );
 }

@@ -28,6 +28,8 @@ import 'styles.dart';
 import 'text.dart';
 import 'unknown_component.dart';
 
+Widget? _emptySeparatorBuilder(int index) => null;
+
 /// A text editor for styled text and multi-media elements.
 ///
 /// A [SuperEditor] brings together the key pieces needed
@@ -88,6 +90,7 @@ class SuperEditor extends StatefulWidget {
         keyboardActions = defaultKeyboardActions,
         textStyleBuilder = defaultStyleBuilder,
         selectionStyle = defaultSelectionStyle,
+        componentSeparatorBuilder = _emptySeparatorBuilder,
         super(key: key);
 
   @Deprecated("Use unnamed SuperEditor() constructor instead")
@@ -114,6 +117,7 @@ class SuperEditor extends StatefulWidget {
         selectionStyle = selectionStyle ?? defaultSelectionStyle,
         keyboardActions = keyboardActions ?? defaultKeyboardActions,
         componentBuilders = componentBuilders ?? defaultComponentBuilders,
+        componentSeparatorBuilder = _emptySeparatorBuilder,
         super(key: key);
 
   /// Creates a `Super Editor` with common (but configurable) defaults for
@@ -136,6 +140,7 @@ class SuperEditor extends StatefulWidget {
     List<DocumentKeyboardAction>? keyboardActions,
     List<ComponentBuilder>? componentBuilders,
     this.componentVerticalSpacing = 16,
+    this.componentSeparatorBuilder = _emptySeparatorBuilder,
     this.showDebugPaint = false,
   })  : textStyleBuilder = textStyleBuilder ?? defaultStyleBuilder,
         selectionStyle = selectionStyle ?? defaultSelectionStyle,
@@ -209,6 +214,8 @@ class SuperEditor extends StatefulWidget {
 
   /// The vertical distance between visual components in the document layout.
   final double componentVerticalSpacing;
+
+  final Widget? Function(int index) componentSeparatorBuilder;
 
   /// Paints some extra visual ornamentation to help with
   /// debugging, when true.
@@ -291,7 +298,8 @@ class _SuperEditorState extends State<SuperEditor> {
       commonOps: CommonEditorOperations(
         editor: widget.editor,
         composer: _composer,
-        documentLayoutResolver: () => _docLayoutKey.currentState as DocumentLayout,
+        documentLayoutResolver: () =>
+            _docLayoutKey.currentState as DocumentLayout,
       ),
     );
   }
@@ -308,12 +316,14 @@ class _SuperEditorState extends State<SuperEditor> {
       return;
     }
 
-    final node = widget.editor.document.getNodeById(_composer.selection!.extent.nodeId);
+    final node =
+        widget.editor.document.getNodeById(_composer.selection!.extent.nodeId);
     if (node is! TextNode) {
       return;
     }
 
-    final textPosition = _composer.selection!.extent.nodePosition as TextPosition;
+    final textPosition =
+        _composer.selection!.extent.nodePosition as TextPosition;
 
     if (textPosition.offset == 0) {
       if (node.text.text.isEmpty) {
@@ -397,7 +407,8 @@ class _SuperEditorState extends State<SuperEditor> {
           getDocumentLayout: () => _editContext.documentLayout,
           scrollController: widget.scrollController,
           documentKey: _docLayoutKey,
-          popoverToolbarBuilder: widget.androidToolbarBuilder ?? (_) => const SizedBox(),
+          popoverToolbarBuilder:
+              widget.androidToolbarBuilder ?? (_) => const SizedBox(),
           showDebugPaint: widget.showDebugPaint,
           child: child,
         );
@@ -409,7 +420,8 @@ class _SuperEditorState extends State<SuperEditor> {
           getDocumentLayout: () => _editContext.documentLayout,
           scrollController: widget.scrollController,
           documentKey: _docLayoutKey,
-          popoverToolbarBuilder: widget.iOSToolbarBuilder ?? (_) => const SizedBox(),
+          popoverToolbarBuilder:
+              widget.iOSToolbarBuilder ?? (_) => const SizedBox(),
           showDebugPaint: widget.showDebugPaint,
           child: child,
         );
@@ -435,9 +447,11 @@ class _SuperEditorState extends State<SuperEditor> {
             document: widget.editor.document,
             documentSelection: _composer.selection,
             componentBuilders: widget.componentBuilders,
-            showCaret: _focusNode.hasFocus && _gestureMode == DocumentGestureMode.mouse,
+            showCaret: _focusNode.hasFocus &&
+                _gestureMode == DocumentGestureMode.mouse,
             margin: widget.padding,
             componentVerticalSpacing: widget.componentVerticalSpacing,
+            componentSeparatorBuilder: widget.componentSeparatorBuilder,
             extensions: {
               textStylesExtensionKey: widget.textStyleBuilder,
               selectionStylesExtensionKey: widget.selectionStyle,
