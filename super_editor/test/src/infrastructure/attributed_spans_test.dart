@@ -598,6 +598,33 @@ void main() {
         expect(collapsedSpans[2].attributions.length, 1);
         expect(collapsedSpans[2].attributions.first, italicsAttribution);
       });
+
+      test('many overlapping spans', () {
+        final attrs = [boldAttribution, italicsAttribution, underlineAttribution, strikethroughAttribution];
+        var attrIndex = 0;
+        print('generating attributions');
+        final attributions = List.generate(10000, (index) {
+          final attr = attrs[attrIndex];
+          attrIndex = (attrIndex + 1) % attrs.length;
+          return [
+            SpanMarker(attribution: attrs[attrIndex], offset: index, markerType: SpanMarkerType.start),
+            SpanMarker(
+                attribution: attrs[attrIndex], offset: index + (attrs.length - 2), markerType: SpanMarkerType.end),
+          ];
+        }).expand((e) => e).toList();
+
+        print('creating attributedSpans');
+        final attributedSpans = AttributedSpans(attributions: attributions);
+        attrIndex = (attrIndex + 1) % attrs.length;
+
+        print('collapsing spans');
+        final before = DateTime.now();
+        final collapsedSpans = attributedSpans.collapseSpans(contentLength: 10010);
+        final after = DateTime.now();
+
+        final diff = after.difference(before);
+        print('Collapse took: ${diff.inMilliseconds}ms');
+      });
     });
 
     group('equality', () {
