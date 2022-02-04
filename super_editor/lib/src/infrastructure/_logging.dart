@@ -71,28 +71,3 @@ void deactivateLoggers(Set<logging.Logger> loggers) {
 void printLog(record) {
   print('${record.level.name}: ${record.time}: ${record.message}');
 }
-
-// TODO: get rid of this custom Logger when all references are replaced with logging package
-class Logger {
-  static bool _printLogs = true;
-  static void setLoggingMode(bool enabled) {
-    _printLogs = enabled;
-  }
-
-  Logger({
-    required scope,
-  }) : _scope = scope;
-
-  final String _scope;
-
-  void log(String tag, String message, [Exception? exception]) {
-    if (!Logger._printLogs) {
-      return;
-    }
-
-    print('[$_scope] - $tag: $message');
-    if (exception != null) {
-      print(' - ${exception.toString()}');
-    }
-  }
-}

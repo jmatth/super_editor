@@ -12,14 +12,14 @@ import 'document_input_keyboard.dart';
 import 'paragraph.dart';
 import 'text.dart';
 
-final _log = Logger(scope: 'document_keyboard_actions.dart');
+final _log = editorKeyLog;
 
 ExecutionInstruction doNothingWhenThereIsNoSelection({
   required EditContext editContext,
   required RawKeyEvent keyEvent,
 }) {
   if (editContext.composer.selection == null) {
-    _log.log('doNothingWhenThereIsNoSelection', ' - no selection. Returning.');
+    _log.info('doNothingWhenThereIsNoSelection:  - no selection. Returning.');
     return ExecutionInstruction.haltExecution;
   } else {
     return ExecutionInstruction.continueExecution;
@@ -37,7 +37,7 @@ ExecutionInstruction pasteWhenCmdVIsPressed({
     return ExecutionInstruction.continueExecution;
   }
 
-  _log.log('pasteWhenCmdVIsPressed', 'Pasting clipboard content...');
+  _log.info('pasteWhenCmdVIsPressed: Pasting clipboard content...');
   editContext.commonOps.paste();
 
   return ExecutionInstruction.haltExecution;
@@ -133,7 +133,7 @@ ExecutionInstruction anyCharacterOrDestructiveKeyToDeleteSelection({
   required EditContext editContext,
   required RawKeyEvent keyEvent,
 }) {
-  _log.log('deleteExpandedSelectionWhenCharacterOrDestructiveKeyPressed', 'Running...');
+  _log.info('deleteExpandedSelectionWhenCharacterOrDestructiveKeyPressed: Running...');
   if (editContext.composer.selection == null || editContext.composer.selection!.isCollapsed) {
     return ExecutionInstruction.continueExecution;
   }
@@ -213,21 +213,21 @@ ExecutionInstruction mergeNodeWithNextWhenDeleteIsPressed({
 
   final node = editContext.editor.document.getNodeById(editContext.composer.selection!.extent.nodeId);
   if (node is! TextNode) {
-    _log.log('mergeNodeWithNextWhenDeleteIsPressed', 'WARNING: Cannot combine node of type: $node');
+    _log.info('mergeNodeWithNextWhenDeleteIsPressed: WARNING: Cannot combine node of type: $node');
     return ExecutionInstruction.continueExecution;
   }
 
   final nextNode = editContext.editor.document.getNodeAfter(node);
   if (nextNode == null) {
-    _log.log('mergeNodeWithNextWhenDeleteIsPressed', 'At bottom of document. Cannot merge with node above.');
+    _log.info('mergeNodeWithNextWhenDeleteIsPressed: At bottom of document. Cannot merge with node above.');
     return ExecutionInstruction.continueExecution;
   }
   if (nextNode is! TextNode) {
-    _log.log('mergeNodeWithNextWhenDeleteIsPressed', 'Cannot merge ParagraphNode into node of type: $nextNode');
+    _log.info('mergeNodeWithNextWhenDeleteIsPressed: Cannot merge ParagraphNode into node of type: $nextNode');
     return ExecutionInstruction.continueExecution;
   }
 
-  _log.log('mergeNodeWithNextWhenDeleteIsPressed', 'Combining node with next.');
+  _log.info('mergeNodeWithNextWhenDeleteIsPressed: Combining node with next.');
   final currentParagraphLength = node.text.text.length;
 
   // Send edit command.
@@ -265,7 +265,7 @@ ExecutionInstruction moveUpDownLeftAndRightWithArrowKeys({
 
   bool didMove = false;
   if (keyEvent.logicalKey == LogicalKeyboardKey.arrowLeft || keyEvent.logicalKey == LogicalKeyboardKey.arrowRight) {
-    _log.log('moveUpDownLeftAndRightWithArrowKeys', ' - handling left arrow key');
+    _log.info('moveUpDownLeftAndRightWithArrowKeys:  - handling left arrow key');
 
     final movementModifiers = <MovementModifier>{};
     if (keyEvent.isPrimaryShortcutKeyPressed) {
@@ -288,11 +288,11 @@ ExecutionInstruction moveUpDownLeftAndRightWithArrowKeys({
       );
     }
   } else if (keyEvent.logicalKey == LogicalKeyboardKey.arrowUp) {
-    _log.log('moveUpDownLeftAndRightWithArrowKeys', ' - handling up arrow key');
+    _log.info('moveUpDownLeftAndRightWithArrowKeys:  - handling up arrow key');
 
     didMove = editContext.commonOps.moveCaretUp(expand: keyEvent.isShiftPressed);
   } else if (keyEvent.logicalKey == LogicalKeyboardKey.arrowDown) {
-    _log.log('moveUpDownLeftAndRightWithArrowKeys', ' - handling down arrow key');
+    _log.info('moveUpDownLeftAndRightWithArrowKeys:  - handling down arrow key');
 
     didMove = editContext.commonOps.moveCaretDown(expand: keyEvent.isShiftPressed);
   }
