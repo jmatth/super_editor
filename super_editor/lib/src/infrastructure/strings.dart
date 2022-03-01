@@ -1,16 +1,21 @@
+import 'dart:collection';
+
 import 'package:characters/characters.dart';
+
+final _separatorRegex = RegExp(r'^[\p{Z}\p{P}]$', unicode: true);
 
 extension CharacterMovement on String {
   /// Returns the code point index of the character that sits
-  /// one word upstream from the given [textOffset] code point index.
+  /// at the next start of word upstream from the given
+  /// [textOffset] code point index.
   ///
   /// Examples:
   ///   |word up -> `null`
   ///   wo|rd up -> `0`
   ///   word| up -> `0`
-  ///   word |up -> `4`
-  ///   word up| -> `6`
-  int? moveOffsetUpstreamByWord(int textOffset, {int characterCount = 1}) {
+  ///   word |up -> `0`
+  ///   word up| -> `5`
+  int? moveOffsetUpstreamByWord(int textOffset) {
     if (textOffset < 0 || textOffset > length) {
       throw Exception("Index '$textOffset' is out of string range. Length: $length");
     }
@@ -19,34 +24,38 @@ extension CharacterMovement on String {
       return null;
     }
 
-    bool isInSpace = false;
+    bool isInSeparator = false;
 
-    int lastSpaceStartCodePointOffset = 0;
-    int lastSpaceEndCodePointOffset = 0;
+    final separatorEnds = Queue<int>()..addFirst(0);
 
     int visitedCharacterCount = 0;
     int codePointIndex = 0;
     for (final character in characters) {
-      if (visitedCharacterCount >= textOffset - 1) {
-        // We're at the given text offset. The upstream word offset is
-        // at lastSpaceEndCodePointOffset.
-        break;
-      }
-
-      if (character == " " && !isInSpace) {
-        lastSpaceStartCodePointOffset = codePointIndex;
-      }
-
-      isInSpace = character == " ";
+      isInSeparator = _separatorRegex.hasMatch(character);
       codePointIndex += character.length;
       visitedCharacterCount += 1;
 
-      if (character == " ") {
-        lastSpaceEndCodePointOffset = codePointIndex;
+      if (isInSeparator) {
+        // If the last separator end was before this index, it wasn't really the
+        // end. Remove and replace it. Always keep 0 as a special case to make
+        // sure we can reach the start of the string.
+        if (separatorEnds.first != 0 && separatorEnds.first == codePointIndex - character.length) {
+          separatorEnds.removeFirst();
+        }
+        separatorEnds.addFirst(codePointIndex);
+        if (separatorEnds.length > 2) {
+          separatorEnds.removeLast();
+        }
+      }
+
+      if (visitedCharacterCount >= textOffset) {
+        // We're at the given text offset. The upstream word offset is
+        // in the separatorEnds queue.
+        break;
       }
     }
 
-    return lastSpaceEndCodePointOffset < textOffset ? lastSpaceEndCodePointOffset : lastSpaceStartCodePointOffset;
+    return separatorEnds.first < textOffset ? separatorEnds.first : separatorEnds.last;
   }
 
   /// Returns the code point index of the character that sits
@@ -86,16 +95,16 @@ extension CharacterMovement on String {
   }
 
   /// Returns the code point index of the character that sits
-  /// one word downstream from given [textOffset] code point
-  /// index.
+  /// after the next end of word downstream from the given
+  /// [textOffset] code point index.
   ///
   /// Examples:
   ///   |word up -> `4`
   ///   wo|rd up -> `4`
-  ///   word| up -> `5`
+  ///   word| up -> `7`
   ///   word |up -> `7`
   ///   word up| -> `null`
-  int? moveOffsetDownstreamByWord(int textOffset, {int characterCount = 1}) {
+  int? moveOffsetDownstreamByWord(int textOffset) {
     if (textOffset < 0 || textOffset > length) {
       throw Exception("Index '$textOffset' is out of string range. Length: $length");
     }
@@ -104,29 +113,23 @@ extension CharacterMovement on String {
       return null;
     }
 
-    bool isInSpace = false;
+    bool isInSeparator = false;
 
-    int lastSpaceStartCodePointOffset = 0;
-    int lastSpaceEndCodePointOffset = 0;
+    int lastSeparatorStartCodePointOffset = 0;
 
     int codePointIndex = 0;
     for (final character in characters) {
-      if (character == " " && !isInSpace) {
-        lastSpaceStartCodePointOffset = codePointIndex;
+      final characterIsSeparator = _separatorRegex.hasMatch(character);
+
+      if (characterIsSeparator && !isInSeparator) {
+        lastSeparatorStartCodePointOffset = codePointIndex;
       }
 
-      isInSpace = character == " ";
+      isInSeparator = characterIsSeparator;
       codePointIndex += character.length;
 
-      if (character == " ") {
-        lastSpaceEndCodePointOffset = codePointIndex;
-      }
-
-      if (lastSpaceStartCodePointOffset > textOffset) {
-        return lastSpaceStartCodePointOffset;
-      }
-      if (lastSpaceEndCodePointOffset > textOffset) {
-        return lastSpaceEndCodePointOffset;
+      if (lastSeparatorStartCodePointOffset > textOffset) {
+        return lastSeparatorStartCodePointOffset;
       }
     }
 
