@@ -12,7 +12,10 @@ dependencies:
     sdk: flutter
 
   attributed_text:
-    path: ../attributed_text
+    git:
+      url: https://github.com/jmatth/super_editor
+      path: attributed_text
+      ref: main
   characters: ^1.2.0
   collection: ^1.15.0
   http: ^0.13.1
@@ -22,12 +25,21 @@ dependencies:
   flutter_test:
     sdk: flutter
   super_selectable_text:
-    path: ../super_selectable_text
+    git:
+      url: https://github.com/jmatth/super_editor
+      path: super_selectable_text
+      ref: main
   uuid: ^3.0.3
 
 dev_dependencies:
   golden_toolkit: ^0.11.0
   mockito: ^5.0.4
+
+dependency_overrides:
+  attributed_text:
+    path: ../attributed_text
+  super_selectable_text:
+    path: ../super_selectable_text
 
 flutter:
   # no Flutter configuration
