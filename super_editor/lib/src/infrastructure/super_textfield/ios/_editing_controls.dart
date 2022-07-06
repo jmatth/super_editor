@@ -414,14 +414,14 @@ class _IOSEditingControlsState extends State<IOSEditingControls> with WidgetsBin
         ? widget.editingController.textController.selection.base
         : widget.editingController.textController.selection.extent;
     final upstreamHandleOffsetInText = _textPositionToTextOffset(upstreamTextPosition);
-    final upstreamLineHeight = 
+    final upstreamLineHeight =
         _textLayout.getCharacterBox(upstreamTextPosition)?.toRect().height ?? _textLayout.estimatedLineHeight;
 
     final downstreamTextPosition = selectionDirection == TextAffinity.downstream
         ? widget.editingController.textController.selection.extent
         : widget.editingController.textController.selection.base;
     final downstreamHandleOffsetInText = _textPositionToTextOffset(downstreamTextPosition);
-    final downstreamLineHeight = 
+    final downstreamLineHeight =
         _textLayout.getCharacterBox(downstreamTextPosition)?.toRect().height ?? _textLayout.estimatedLineHeight;
 
     if (upstreamLineHeight == 0 || downstreamLineHeight == 0) {

@@ -14,8 +14,7 @@ void main() {
         await _pumpTestApp(tester);
 
         // Tap in a place without text
-        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) -
-            const Offset(10, 10));
+        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) - const Offset(10, 10));
         await tester.pumpAndSettle();
 
         // Ensure selection is at the end of the text
@@ -34,8 +33,7 @@ void main() {
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
         // Tap in a place without text
-        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) -
-            const Offset(10, 10));
+        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) - const Offset(10, 10));
         await tester.pumpAndSettle();
 
         // Ensure selection is at the end of the text
@@ -46,8 +44,7 @@ void main() {
       });
     });
 
-    group('tapping in an area containing text places the caret at tap position',
-        () {
+    group('tapping in an area containing text places the caret at tap position', () {
       testWidgetsOnMobile("when the field does not have focus", (tester) async {
         await _pumpTestApp(tester);
 
@@ -66,8 +63,7 @@ void main() {
         await _pumpTestApp(tester);
 
         // Tap in a place without text
-        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) -
-            const Offset(10, 10));
+        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) - const Offset(10, 10));
         // Without this 'delay' onTapDown is not called the second time
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
@@ -88,8 +84,7 @@ void main() {
         await _pumpTestApp(tester);
 
         // Tap down, but don't release.
-        final gesture = await tester
-            .startGesture(tester.getTopLeft(find.byType(SuperTextField)));
+        final gesture = await tester.startGesture(tester.getTopLeft(find.byType(SuperTextField)));
         await tester.pumpAndSettle();
 
         // Ensure the field has a selection
@@ -112,8 +107,7 @@ void main() {
         await _pumpTestApp(tester);
 
         // Tap down, but don't release.
-        final gesture = await tester
-            .startGesture(tester.getTopLeft(find.byType(SuperTextField)));
+        final gesture = await tester.startGesture(tester.getTopLeft(find.byType(SuperTextField)));
         addTearDown(() => gesture.removePointer());
         await tester.pumpAndSettle();
 
@@ -121,13 +115,11 @@ void main() {
         expect(SuperTextFieldInspector.findSelection()!.isValid, false);
       });
 
-      testWidgetsOnMobile("tap down and drag does NOT focus the field",
-          (tester) async {
+      testWidgetsOnMobile("tap down and drag does NOT focus the field", (tester) async {
         await _pumpTestApp(tester);
 
         // Tap down, start a pan, then drag up.
-        final gesture = await tester
-            .startGesture(tester.getTopLeft(find.byType(SuperTextField)));
+        final gesture = await tester.startGesture(tester.getTopLeft(find.byType(SuperTextField)));
         addTearDown(() => gesture.removePointer());
         await tester.pumpAndSettle();
         await gesture.moveBy(const Offset(2, 2));
@@ -150,21 +142,17 @@ void main() {
         expect(SuperTextFieldInspector.findSelection()!.isValid, true);
       });
 
-      testWidgetsOnMobile("tap down in focused field moves the caret",
-          (tester) async {
+      testWidgetsOnMobile("tap down in focused field moves the caret", (tester) async {
         await _pumpTestApp(tester);
 
         // Tap in empty space to place the caret at the end of the text.
-        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) -
-            const Offset(10, 10));
+        await tester.tapAt(tester.getBottomRight(find.byType(SuperTextField)) - const Offset(10, 10));
         // Without this 'delay' onTapDown is not called the second time
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
-        expect(SuperTextFieldInspector.findSelection()!.extent.offset,
-            greaterThan(0));
+        expect(SuperTextFieldInspector.findSelection()!.extent.offset, greaterThan(0));
 
         // Tap DOWN at beginning of text to move the caret.
-        final gesture = await tester
-            .startGesture(tester.getTopLeft(find.byType(SuperTextField)));
+        final gesture = await tester.startGesture(tester.getTopLeft(find.byType(SuperTextField)));
         addTearDown(() => gesture.removePointer());
         await tester.pumpAndSettle();
 
@@ -172,9 +160,7 @@ void main() {
         expect(SuperTextFieldInspector.findSelection()!.extent.offset, 0);
       });
 
-      testWidgetsOnMobile(
-          "tap up shows the keyboard if the field already has focus",
-          (tester) async {
+      testWidgetsOnMobile("tap up shows the keyboard if the field already has focus", (tester) async {
         await _pumpTestApp(tester);
 
         bool isShowKeyboardCalled = false;
@@ -184,8 +170,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Intercept messages sent to the platform.
-        tester.binding.defaultBinaryMessenger.setMockMessageHandler(
-            SystemChannels.textInput.name, (message) async {
+        tester.binding.defaultBinaryMessenger.setMockMessageHandler(SystemChannels.textInput.name, (message) async {
           final methodCall = const JSONMethodCodec().decodeMethodCall(message);
           if (methodCall.method == "TextInput.show") {
             isShowKeyboardCalled = true;

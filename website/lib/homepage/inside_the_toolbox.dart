@@ -96,10 +96,10 @@ class InsideTheToolbox extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4),
-          ),    
+          ),
           child: SuperTextWithSelection.single(
             richText: const TextSpan(
-              text: 'This text is selectable. The caret and selection rendering is custom.',              
+              text: 'This text is selectable. The caret and selection rendering is custom.',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,
@@ -110,9 +110,8 @@ class InsideTheToolbox extends StatelessWidget {
                 baseOffset: 13,
                 extentOffset: 23,
               ),
-              
             ),
-          ),          
+          ),
         ),
       ),
     );

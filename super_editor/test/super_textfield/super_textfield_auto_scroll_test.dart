@@ -33,7 +33,8 @@ void main() {
         expect(selectionOffset.dy.floor(), lessThanOrEqualTo(screenSizeWithKeyboard.height));
 
         // Ensure we scroll only the necessary to reveal the selection, plus a small gap
-        expect(screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
+        expect(
+            screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
 
         // Ensure selection doesn't scroll beyond the top
         expect(selectionOffset.dy.floor(), greaterThanOrEqualTo(0));
@@ -60,7 +61,8 @@ void main() {
         expect(selectionOffset.dy.floor(), lessThanOrEqualTo(screenSizeWithKeyboard.height));
 
         // Ensure we scroll only the necessary to reveal the selection, plus a small gap
-        expect(screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
+        expect(
+            screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
 
         // Ensure selection doesn't scroll beyond the top
         expect(selectionOffset.dy.floor(), greaterThanOrEqualTo(0));
@@ -87,7 +89,8 @@ void main() {
         expect(selectionOffset.dy.floor(), lessThanOrEqualTo(screenSizeWithKeyboard.height));
 
         // Ensure we scroll only the necessary to reveal the selection, plus a small gap
-        expect(screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
+        expect(
+            screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
 
         // Ensure selection doesn't scroll beyond the top
         expect(selectionOffset.dy.floor(), greaterThanOrEqualTo(0));

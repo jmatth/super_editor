@@ -60,7 +60,8 @@ void main() {
         );
       });
 
-      test('when the node exists in the document, and the targetIndex is valid, moves it to the given target index', () {
+      test('when the node exists in the document, and the targetIndex is valid, moves it to the given target index',
+          () {
         final node = ParagraphNode(id: 'move-me', text: AttributedText());
         final document = MutableDocument(
           nodes: [
