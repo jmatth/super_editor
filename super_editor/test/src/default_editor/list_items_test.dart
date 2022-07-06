@@ -13,9 +13,9 @@ void main() {
       test('converts paragraph with "1. " to ordered list item', () {
         Platform.setTestInstance(MacPlatform());
 
-        final _editContext = _createEditContextWithParagraph();
+        final editContext = _createEditContextWithParagraph();
 
-        _typeKeys(_editContext, [
+        _typeKeys(editContext, [
           const FakeRawKeyEvent(
             data: FakeRawKeyEventData(
               logicalKey: LogicalKeyboardKey.numpad1,
@@ -39,7 +39,7 @@ void main() {
           ),
         ]);
 
-        final listItemNode = _editContext.editor.document.nodes.first;
+        final listItemNode = editContext.editor.document.nodes.first;
         expect(listItemNode, isA<ListItemNode>());
         expect((listItemNode as ListItemNode).text.text.isEmpty, isTrue);
 
@@ -49,9 +49,9 @@ void main() {
       test('converts paragraph with " 1. " to ordered list item', () {
         Platform.setTestInstance(MacPlatform());
 
-        final _editContext = _createEditContextWithParagraph();
+        final editContext = _createEditContextWithParagraph();
 
-        _typeKeys(_editContext, [
+        _typeKeys(editContext, [
           const FakeRawKeyEvent(
             data: FakeRawKeyEventData(
               logicalKey: LogicalKeyboardKey.space,
@@ -82,7 +82,7 @@ void main() {
           ),
         ]);
 
-        final listItemNode = _editContext.editor.document.nodes.first;
+        final listItemNode = editContext.editor.document.nodes.first;
         expect(listItemNode, isA<ListItemNode>());
         expect((listItemNode as ListItemNode).text.text.isEmpty, isTrue);
 
@@ -92,9 +92,9 @@ void main() {
       test('converts paragraph with "1) " to ordered list item', () {
         Platform.setTestInstance(MacPlatform());
 
-        final _editContext = _createEditContextWithParagraph();
+        final editContext = _createEditContextWithParagraph();
 
-        _typeKeys(_editContext, [
+        _typeKeys(editContext, [
           const FakeRawKeyEvent(
             data: FakeRawKeyEventData(
               logicalKey: LogicalKeyboardKey.numpad1,
@@ -118,7 +118,7 @@ void main() {
           ),
         ]);
 
-        final listItemNode = _editContext.editor.document.nodes.first;
+        final listItemNode = editContext.editor.document.nodes.first;
         expect(listItemNode, isA<ListItemNode>());
         expect((listItemNode as ListItemNode).text.text.isEmpty, isTrue);
 
@@ -128,9 +128,9 @@ void main() {
       test('converts paragraph with " 1) " to ordered list item', () {
         Platform.setTestInstance(MacPlatform());
 
-        final _editContext = _createEditContextWithParagraph();
+        final editContext = _createEditContextWithParagraph();
 
-        _typeKeys(_editContext, [
+        _typeKeys(editContext, [
           const FakeRawKeyEvent(
             data: FakeRawKeyEventData(
               logicalKey: LogicalKeyboardKey.space,
@@ -161,7 +161,7 @@ void main() {
           ),
         ]);
 
-        final listItemNode = _editContext.editor.document.nodes.first;
+        final listItemNode = editContext.editor.document.nodes.first;
         expect(listItemNode, isA<ListItemNode>());
         expect((listItemNode as ListItemNode).text.text.isEmpty, isTrue);
 
@@ -171,9 +171,9 @@ void main() {
       test('does not convert paragraph with "1 " to ordered list item', () {
         Platform.setTestInstance(MacPlatform());
 
-        final _editContext = _createEditContextWithParagraph();
+        final editContext = _createEditContextWithParagraph();
 
-        _typeKeys(_editContext, [
+        _typeKeys(editContext, [
           const FakeRawKeyEvent(
             data: FakeRawKeyEventData(
               logicalKey: LogicalKeyboardKey.numpad1,
@@ -190,7 +190,7 @@ void main() {
           ),
         ]);
 
-        final paragraphNode = _editContext.editor.document.nodes.first;
+        final paragraphNode = editContext.editor.document.nodes.first;
         expect(paragraphNode, isA<ParagraphNode>());
         expect((paragraphNode as ParagraphNode).text.text, "1 ");
 
@@ -200,9 +200,9 @@ void main() {
       test('does not convert paragraph with " 1 " to ordered list item', () {
         Platform.setTestInstance(MacPlatform());
 
-        final _editContext = _createEditContextWithParagraph();
+        final editContext = _createEditContextWithParagraph();
 
-        _typeKeys(_editContext, [
+        _typeKeys(editContext, [
           const FakeRawKeyEvent(
             data: FakeRawKeyEventData(
               logicalKey: LogicalKeyboardKey.space,
@@ -226,7 +226,7 @@ void main() {
           ),
         ]);
 
-        final paragraphNode = _editContext.editor.document.nodes.first;
+        final paragraphNode = editContext.editor.document.nodes.first;
         expect(paragraphNode, isA<ParagraphNode>());
         expect((paragraphNode as ParagraphNode).text.text, " 1 ");
 

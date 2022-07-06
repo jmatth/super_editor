@@ -51,8 +51,8 @@ class ScrollableDocument extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ancestorScrollable = Scrollable.of(context);
-    final _ancestorScrollPosition = ancestorScrollable?.position;
-    final addScrollView = _ancestorScrollPosition == null;
+    final ancestorScrollPosition = ancestorScrollable?.position;
+    final addScrollView = ancestorScrollPosition == null;
 
     return addScrollView
         ? SizedBox(
