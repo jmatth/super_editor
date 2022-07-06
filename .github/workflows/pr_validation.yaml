@@ -1,6 +1,27 @@
 name: Test project in a PR
 on: [pull_request]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the PR branch
+      - uses: actions/checkout@v3
+
+      # Setup Flutter environment
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - run: flutter pub global activate melos ^2.5.0
+
+      # Download all the packages that the app uses and override internal dependencies
+      - run: melos bootstrap
+
+      - run: melos run check-format
+
+      - run: melos run analyze
+
   test_mac:
     runs-on: macos-latest
     defaults:
@@ -17,10 +38,10 @@ jobs:
           channel: "stable"
           architecture: x64
 
-      # Download all the packages that the app uses
-      - run: flutter pub get
+      - run: flutter pub global activate melos ^2.5.0
 
-      # TODO: run static analysis here when we get to zero analysis warnings
+      # Download all the packages that the app uses and override internal dependencies
+      - run: melos bootstrap
 
       # Run all tests
       - run: flutter test
@@ -40,10 +61,10 @@ jobs:
         with:
           channel: "stable"
 
-      # Download all the packages that the app uses
-      - run: flutter pub get
+      - run: flutter pub global activate melos ^2.5.0
 
-      # TODO: run static analysis here when we get to zero analysis warnings
+      # Download all the packages that the app uses and override internal dependencies
+      - run: melos bootstrap
 
       # Run all tests
       - run: flutter test
@@ -63,10 +84,10 @@ jobs:
         with:
           channel: "stable"
 
-      # Download all the packages that the app uses
-      - run: flutter pub get
+      - run: flutter pub global activate melos ^2.5.0
 
-      # TODO: run static analysis here when we get to zero analysis warnings
+      # Download all the packages that the app uses and override internal dependencies
+      - run: melos bootstrap
 
       # Run all tests
       - run: flutter test
@@ -85,10 +106,10 @@ jobs:
         with:
           channel: "stable"
 
-      # Download all the packages that the app uses
-      - run: flutter pub get
+      - run: flutter pub global activate melos ^2.5.0
 
-      # TODO: Enforce static analysis
+      # Download all the packages that the app uses and override internal dependencies
+      - run: melos bootstrap
 
       # Run all tests
       - run: flutter test
@@ -107,11 +128,10 @@ jobs:
         with:
           channel: "stable"
 
-      # Download all the packages that the app uses
-      - run: flutter pub get
+      - run: flutter pub global activate melos ^2.5.0
 
-      # Enforce static analysis
-      - run: flutter analyze
+      # Download all the packages that the app uses and override internal dependencies
+      - run: melos bootstrap
 
       # Run all tests
       - run: flutter test
@@ -131,8 +151,10 @@ jobs:
           channel: "stable"
           architecture: x64
 
-      # Download all the packages that the app uses
-      - run: flutter pub get
+      - run: flutter pub global activate melos ^2.5.0
+
+      # Download all the packages that the app uses and override internal dependencies
+      - run: melos bootstrap
 
       # Run all golden tests
       - run: flutter test test_goldens
@@ -151,9 +173,6 @@ jobs:
 
       # Install app dependencies
       - run: dart pub get
-
-      # Enforce static analysis
-      - run: dart analyze
 
       # Run all tests
       - run: dart test
