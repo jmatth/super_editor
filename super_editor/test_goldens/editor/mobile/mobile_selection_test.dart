@@ -60,7 +60,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -108,7 +108,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -225,7 +225,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -277,7 +277,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -329,7 +329,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -416,7 +416,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -467,7 +467,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -584,7 +584,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -636,7 +636,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -688,7 +688,7 @@ void main() {
             await tester.dragFrom(handleRectGlobal.center, dragDelta);
 
             // Update the drag line for debug purposes
-            dragLine.value = _Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
+            dragLine.value = Line(handleRectGlobal.center, handleRectGlobal.center + dragDelta);
 
             // Even though this is a golden test, we verify the final selection
             // to make it easier to spot rendering problems vs selection problems.
@@ -718,7 +718,7 @@ void testParagraphSelection(
   String description,
   DocumentGestureMode platform,
   String goldenName,
-  Future<void> Function(WidgetTester, DocumentComposer, GlobalKey docKey, ValueNotifier<_Line?> dragLine) test,
+  Future<void> Function(WidgetTester, DocumentComposer, GlobalKey docKey, ValueNotifier<Line?> dragLine) test,
 ) {
   final docKey = GlobalKey();
 
@@ -728,7 +728,7 @@ void testParagraphSelection(
       ..devicePixelRatioTestValue = 1.0;
     tester.binding.platformDispatcher.textScaleFactorTestValue = 1.0;
 
-    final dragLine = ValueNotifier<_Line?>(null);
+    final dragLine = ValueNotifier<Line?>(null);
 
     final composer = DocumentComposer();
 
@@ -763,7 +763,7 @@ void testParagraphSelection(
 }
 
 Widget _buildScaffold({
-  required ValueNotifier<_Line?> dragLine,
+  required ValueNotifier<Line?> dragLine,
   required Widget child,
 }) {
   return DragLinePaint(
@@ -815,12 +815,12 @@ class DragLinePaint extends StatelessWidget {
     required this.child,
   }) : super(key: key);
 
-  final ValueNotifier<_Line?> line;
+  final ValueNotifier<Line?> line;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<_Line?>(
+    return ValueListenableBuilder<Line?>(
       valueListenable: line,
       builder: (context, line, child) {
         return CustomPaint(
@@ -835,11 +835,11 @@ class DragLinePaint extends StatelessWidget {
 
 class DragLinePainter extends CustomPainter {
   DragLinePainter({
-    required _Line line,
+    required Line line,
   })  : _line = line,
         _paint = Paint();
 
-  final _Line _line;
+  final Line _line;
   final Paint _paint;
 
   @override
@@ -867,8 +867,8 @@ class DragLinePainter extends CustomPainter {
   }
 }
 
-class _Line {
-  _Line(this.from, this.to);
+class Line {
+  Line(this.from, this.to);
 
   final Offset from;
   final Offset to;
@@ -876,7 +876,7 @@ class _Line {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is _Line && runtimeType == other.runtimeType && from == other.from && to == other.to;
+      other is Line && runtimeType == other.runtimeType && from == other.from && to == other.to;
 
   @override
   int get hashCode => from.hashCode ^ to.hashCode;

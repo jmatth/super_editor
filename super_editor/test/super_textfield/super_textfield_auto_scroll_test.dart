@@ -144,7 +144,7 @@ Future<void> _pumpTestApp(
 
 void testWidgetsOnMobileWithKeyboard(
   String description,
-  Future<void> Function(WidgetTester tester, _KeyboardToggle keyboardToggle) test,
+  Future<void> Function(WidgetTester tester, KeyboardToggle keyboardToggle) test,
 ) {
   testWidgetsOnMobile(description, (tester) async {
     tester.binding.window
@@ -153,7 +153,7 @@ void testWidgetsOnMobileWithKeyboard(
       ..devicePixelRatioTestValue = 1.0;
     addTearDown(() => tester.binding.window.clearAllTestValues());
 
-    final keyboardToggle = _KeyboardToggle(
+    final keyboardToggle = KeyboardToggle(
       tester: tester,
       sizeWithoutKeyboard: screenSizeWithoutKeyboard,
       sizeWithKeyboard: screenSizeWithKeyboard,
@@ -163,8 +163,8 @@ void testWidgetsOnMobileWithKeyboard(
   });
 }
 
-class _KeyboardToggle {
-  _KeyboardToggle({
+class KeyboardToggle {
+  KeyboardToggle({
     required this.tester,
     required this.sizeWithoutKeyboard,
     required this.sizeWithKeyboard,
