@@ -700,11 +700,6 @@ class _SuperTextFieldGestureInteractorState extends State<SuperTextFieldGestureI
     return _textLayout.getPositionNearestToOffset(textOffset);
   }
 
-  bool _isTextAtOffset(Offset textFieldOffset) {
-    final textOffset = _getTextOffset(textFieldOffset);
-    return _textLayout.isTextAtOffset(textOffset);
-  }
-
   Offset _getTextOffset(Offset textFieldOffset) {
     final textFieldBox = context.findRenderObject() as RenderBox;
     final textBox = widget.textKey.currentContext!.findRenderObject() as RenderBox;
