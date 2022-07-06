@@ -133,7 +133,7 @@ extension SuperTextFieldRobot on WidgetTester {
     }
 
     if (!textFieldBox.size.contains(adjustedOffset)) {
-      print("Couldn't tap at $adjustedOffset in text field with size ${textFieldBox.size}");
+      printToConsole("Couldn't tap at $adjustedOffset in text field with size ${textFieldBox.size}");
       return false;
     }
 
