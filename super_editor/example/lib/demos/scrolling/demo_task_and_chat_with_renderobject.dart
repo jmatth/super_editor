@@ -24,7 +24,7 @@ import 'package:super_editor/super_editor.dart';
 /// this demo is a custom `RenderBox` that implements the desired layout behavior.
 class TaskAndChatWithRenderObjectDemo extends StatefulWidget {
   @override
-  _TaskAndChatWithRenderObjectDemoState createState() => _TaskAndChatWithRenderObjectDemoState();
+  State<TaskAndChatWithRenderObjectDemo> createState() => _TaskAndChatWithRenderObjectDemoState();
 }
 
 class _TaskAndChatWithRenderObjectDemoState extends State<TaskAndChatWithRenderObjectDemo> {

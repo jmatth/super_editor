@@ -22,7 +22,7 @@ import 'package:super_editor/super_editor.dart';
 /// The layout is implemented with a [CustomScrollView] and relevant `Sliver`s.
 class TaskAndChatWithCustomScrollViewDemo extends StatefulWidget {
   @override
-  _TaskAndChatWithCustomScrollViewDemoState createState() => _TaskAndChatWithCustomScrollViewDemoState();
+  State<TaskAndChatWithCustomScrollViewDemo> createState() => _TaskAndChatWithCustomScrollViewDemoState();
 }
 
 class _TaskAndChatWithCustomScrollViewDemoState extends State<TaskAndChatWithCustomScrollViewDemo> {

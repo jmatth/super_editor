@@ -71,7 +71,7 @@ class AndroidDocumentTouchInteractor extends StatefulWidget {
   final Widget child;
 
   @override
-  _AndroidDocumentTouchInteractorState createState() => _AndroidDocumentTouchInteractorState();
+  State<AndroidDocumentTouchInteractor> createState() => _AndroidDocumentTouchInteractorState();
 }
 
 class _AndroidDocumentTouchInteractorState extends State<AndroidDocumentTouchInteractor>
@@ -915,7 +915,7 @@ class AndroidDocumentTouchEditingControls extends StatefulWidget {
   final bool showDebugPaint;
 
   @override
-  _AndroidDocumentTouchEditingControlsState createState() => _AndroidDocumentTouchEditingControlsState();
+  State<AndroidDocumentTouchEditingControls> createState() => _AndroidDocumentTouchEditingControlsState();
 }
 
 class _AndroidDocumentTouchEditingControlsState extends State<AndroidDocumentTouchEditingControls>

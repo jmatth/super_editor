@@ -329,7 +329,7 @@ class TextWithHintComponent extends StatefulWidget {
   final bool showDebugPaint;
 
   @override
-  _TextWithHintComponentState createState() => _TextWithHintComponentState();
+  State<TextWithHintComponent> createState() => _TextWithHintComponentState();
 }
 
 class _TextWithHintComponentState extends State<TextWithHintComponent>

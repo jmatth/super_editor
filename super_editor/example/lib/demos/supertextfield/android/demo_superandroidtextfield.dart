@@ -6,7 +6,7 @@ import 'package:super_editor/super_editor.dart';
 /// Demo of [SuperAndroidTextField].
 class SuperAndroidTextFieldDemo extends StatefulWidget {
   @override
-  _SuperAndroidTextFieldDemoState createState() => _SuperAndroidTextFieldDemoState();
+  State<SuperAndroidTextFieldDemo> createState() => _SuperAndroidTextFieldDemoState();
 }
 
 class _SuperAndroidTextFieldDemoState extends State<SuperAndroidTextFieldDemo> {

@@ -107,7 +107,7 @@ class DocumentMouseInteractor extends StatefulWidget {
   final Widget child;
 
   @override
-  _DocumentMouseInteractorState createState() => _DocumentMouseInteractorState();
+  State<DocumentMouseInteractor> createState() => _DocumentMouseInteractorState();
 }
 
 class _DocumentMouseInteractorState extends State<DocumentMouseInteractor> with SingleTickerProviderStateMixin {

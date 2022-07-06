@@ -48,7 +48,7 @@ class SingleColumnDocumentLayout extends StatefulWidget {
   final bool showDebugPaint;
 
   @override
-  _SingleColumnDocumentLayoutState createState() => _SingleColumnDocumentLayoutState();
+  State<SingleColumnDocumentLayout> createState() => _SingleColumnDocumentLayoutState();
 }
 
 class _SingleColumnDocumentLayoutState extends State<SingleColumnDocumentLayout> implements DocumentLayout {

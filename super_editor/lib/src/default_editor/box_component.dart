@@ -83,7 +83,7 @@ class BoxComponent extends StatefulWidget {
   final Widget child;
 
   @override
-  _BoxComponentState createState() => _BoxComponentState();
+  State<BoxComponent> createState() => _BoxComponentState();
 }
 
 class _BoxComponentState extends State<BoxComponent> with DocumentComponent {

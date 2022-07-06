@@ -27,7 +27,7 @@ class IOSTextFieldCaret extends StatefulWidget {
   final BorderRadius caretBorderRadius;
 
   @override
-  _IOSTextFieldCaretState createState() => _IOSTextFieldCaretState();
+  State<IOSTextFieldCaret> createState() => _IOSTextFieldCaretState();
 }
 
 class _IOSTextFieldCaretState extends State<IOSTextFieldCaret> with SingleTickerProviderStateMixin {

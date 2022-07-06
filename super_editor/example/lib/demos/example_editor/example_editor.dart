@@ -1,6 +1,6 @@
 import 'package:example/demos/example_editor/_task.dart';
-import 'package:flutter/foundation.dart';
 import 'package:example/logging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:super_editor/super_editor.dart';
 
@@ -13,7 +13,7 @@ import '_toolbar.dart';
 /// capabilities expand.
 class ExampleEditor extends StatefulWidget {
   @override
-  _ExampleEditorState createState() => _ExampleEditorState();
+  State<ExampleEditor> createState() => _ExampleEditorState();
 }
 
 class _ExampleEditorState extends State<ExampleEditor> {
