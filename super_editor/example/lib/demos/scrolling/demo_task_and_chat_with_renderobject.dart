@@ -78,8 +78,8 @@ class _TaskAndChatWithRenderObjectDemoState extends State<TaskAndChatWithRenderO
 
                 return ColumnWithBottomPin(
                   viewportHeight: viewportSize.height,
-                  child: _buildHeaderAndDocument(),
                   pinnedToBottom: _buildMessages(),
+                  child: _buildHeaderAndDocument(),
                 );
               }),
             ),
