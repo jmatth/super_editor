@@ -200,7 +200,7 @@ class SuperIOSTextFieldState extends State<SuperIOSTextField>
       _textEditingController
         ..removeListener(_onTextOrSelectionChange)
         ..onIOSFloatingCursorChange = null;
-      if (_textEditingController.onPerformActionPressed == _onPerformActionPressed){
+      if (_textEditingController.onPerformActionPressed == _onPerformActionPressed) {
         _textEditingController.onPerformActionPressed = null;
       }
 
@@ -370,7 +370,7 @@ class SuperIOSTextFieldState extends State<SuperIOSTextField>
         break;
       default:
         _log.warning("User pressed unhandled action button: $action");
-    } 
+    }
   }
 
   @override

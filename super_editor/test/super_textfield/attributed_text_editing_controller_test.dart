@@ -711,16 +711,13 @@ void main() {
           );
           expect(controller.composingAttributions.length, 3);
 
-          controller.removeComposingAttributions(
-              {boldAttribution, underlineAttribution});
-              
+          controller.removeComposingAttributions({boldAttribution, underlineAttribution});
+
           expect(controller.composingAttributions.length, 1);
-          expect(controller.composingAttributions.contains(italicsAttribution), true);          
+          expect(controller.composingAttributions.contains(italicsAttribution), true);
         });
-       
-        test(
-            "does nothing when it doesn't have the given composing attributions",
-            () {
+
+        test("does nothing when it doesn't have the given composing attributions", () {
           final controller = AttributedTextEditingController(
             text: AttributedText(text: 'my text'),
           );

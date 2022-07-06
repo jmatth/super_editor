@@ -268,20 +268,19 @@ ExecutionInstruction moveUpDownLeftAndRightWithArrowKeys({
     return ExecutionInstruction.continueExecution;
   }
 
-  if (defaultTargetPlatform == TargetPlatform.linux && keyEvent.isAltPressed && 
-      (keyEvent.logicalKey == LogicalKeyboardKey.arrowUp || keyEvent.logicalKey == LogicalKeyboardKey.arrowDown)
-  ) {
+  if (defaultTargetPlatform == TargetPlatform.linux &&
+      keyEvent.isAltPressed &&
+      (keyEvent.logicalKey == LogicalKeyboardKey.arrowUp || keyEvent.logicalKey == LogicalKeyboardKey.arrowDown)) {
     return ExecutionInstruction.continueExecution;
   }
 
   bool didMove = false;
   if (keyEvent.logicalKey == LogicalKeyboardKey.arrowLeft || keyEvent.logicalKey == LogicalKeyboardKey.arrowRight) {
-    MovementModifier? movementModifier;    
+    MovementModifier? movementModifier;
     if ((defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.linux) &&
-        keyEvent.isControlPressed
-    ) {      
-      movementModifier = MovementModifier.word;      
-    } else if (defaultTargetPlatform == TargetPlatform.macOS && keyEvent.isMetaPressed) {      
+        keyEvent.isControlPressed) {
+      movementModifier = MovementModifier.word;
+    } else if (defaultTargetPlatform == TargetPlatform.macOS && keyEvent.isMetaPressed) {
       movementModifier = MovementModifier.line;
     } else if (defaultTargetPlatform == TargetPlatform.macOS && keyEvent.isAltPressed) {
       movementModifier = MovementModifier.word;
@@ -345,14 +344,14 @@ ExecutionInstruction moveToLineStartWithHome({
 }) {
   if (defaultTargetPlatform != TargetPlatform.windows && defaultTargetPlatform != TargetPlatform.linux) {
     return ExecutionInstruction.continueExecution;
-  }  
+  }
 
   bool didMove = false;
   if (keyEvent.logicalKey == LogicalKeyboardKey.home) {
     didMove = editContext.commonOps.moveCaretUpstream(
       expand: keyEvent.isShiftPressed,
       movementModifier: MovementModifier.line,
-    );    
+    );
   }
 
   return didMove ? ExecutionInstruction.haltExecution : ExecutionInstruction.continueExecution;
@@ -364,7 +363,7 @@ ExecutionInstruction moveToLineEndWithEnd({
 }) {
   if (defaultTargetPlatform != TargetPlatform.windows && defaultTargetPlatform != TargetPlatform.linux) {
     return ExecutionInstruction.continueExecution;
-  }  
+  }
 
   bool didMove = false;
   if (keyEvent.logicalKey == LogicalKeyboardKey.end) {

@@ -7,10 +7,7 @@ import '../../../test/super_editor/document_test_tools.dart';
 void main() {
   group('SuperEditor', () {
     testGoldens('displays paragraphs with different alignments', (tester) async {
-      await tester 
-        .createDocument()
-        .withCustomContent(_createParagraphTestDoc())        
-        .pump();
+      await tester.createDocument().withCustomContent(_createParagraphTestDoc()).pump();
 
       await screenMatchesGolden(tester, 'paragraph_alignments');
     });

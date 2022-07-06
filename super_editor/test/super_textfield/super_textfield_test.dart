@@ -104,7 +104,7 @@ void main() {
     });
 
     group("on mobile", () {
-      group("configures inner textfield textInputAction for newline when it's multiline", () {        
+      group("configures inner textfield textInputAction for newline when it's multiline", () {
         testWidgetsOnAndroid('(on Android)', (tester) async {
           await tester.pumpWidget(
             _buildScaffold(
@@ -141,7 +141,7 @@ void main() {
           expect(innerTextField.textInputAction, TextInputAction.newline);
         });
       });
-      
+
       group("configures inner textfield textInputAction for done when it's singleline", () {
         testWidgetsOnAndroid('(on Android)', (tester) async {
           await tester.pumpWidget(
@@ -178,7 +178,7 @@ void main() {
           // because we should NOT receive new lines
           expect(innerTextField.textInputAction, TextInputAction.done);
         });
-      });    
+      });
     });
 
     group("selection", () {

@@ -242,7 +242,7 @@ class _AndroidDocumentTouchInteractorState extends State<AndroidDocumentTouchInt
       if (mounted) {
         _ensureSelectionExtentIsVisible();
         _updateHandlesAfterSelectionOrLayoutChange();
-        
+
         setState(() {
           // reflow document layout
         });

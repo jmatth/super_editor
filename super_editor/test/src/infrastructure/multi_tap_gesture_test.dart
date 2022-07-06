@@ -43,8 +43,7 @@ void main() {
         ),
       );
 
-      TestGesture gesture =
-          await tester.startGesture(tester.getCenter(tapTargetFinder));
+      TestGesture gesture = await tester.startGesture(tester.getCenter(tapTargetFinder));
       await tester.pump();
       expect(tapDownCount, 1);
       expect(tapCount, 0);
@@ -138,8 +137,7 @@ void main() {
         }),
       );
 
-      TestGesture gesture =
-          await tester.startGesture(tester.getCenter(tapTargetFinder));
+      TestGesture gesture = await tester.startGesture(tester.getCenter(tapTargetFinder));
       await tester.pump();
       expect(tapDownCount, 0);
       expect(tapCount, 0);
@@ -215,8 +213,7 @@ void main() {
         ),
       );
 
-      TestGesture gesture =
-          await tester.startGesture(tester.getCenter(tapTargetFinder));
+      TestGesture gesture = await tester.startGesture(tester.getCenter(tapTargetFinder));
       await tester.pump();
       expect(tapDownCount, 0);
       expect(tapCount, 0);
@@ -269,8 +266,7 @@ void main() {
       expect(timeoutCount, 1);
     });
 
-    testWidgets("can ignore single tap and double tap gestures",
-        (tester) async {
+    testWidgets("can ignore single tap and double tap gestures", (tester) async {
       final recognizer = TapSequenceGestureRecognizer(
         supportedDevices: {PointerDeviceKind.touch},
         reportPrecedingGestures: false,
@@ -311,8 +307,7 @@ void main() {
         ),
       );
 
-      TestGesture gesture =
-          await tester.startGesture(tester.getCenter(tapTargetFinder));
+      TestGesture gesture = await tester.startGesture(tester.getCenter(tapTargetFinder));
       await tester.pump();
       expect(tapDownCount, 0);
       expect(tapCount, 0);
@@ -391,8 +386,7 @@ Widget _buildGestureScaffold(
     home: Center(
       child: RawGestureDetector(
         gestures: {
-          TapSequenceGestureRecognizer: GestureRecognizerFactoryWithHandlers<
-              TapSequenceGestureRecognizer>(
+          TapSequenceGestureRecognizer: GestureRecognizerFactoryWithHandlers<TapSequenceGestureRecognizer>(
             () => recognizer,
             (TapSequenceGestureRecognizer recognizer) {
               recognizer

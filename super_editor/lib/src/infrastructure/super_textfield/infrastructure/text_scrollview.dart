@@ -192,7 +192,8 @@ class _TextScrollViewState extends State<TextScrollView>
     }
 
     final lastCharacterPosition = TextPosition(offset: widget.textEditingController.text.text.length - 1);
-    return (_textLayout.getCharacterBox(lastCharacterPosition)?.bottom ?? _textLayout.estimatedLineHeight) - viewportHeight;
+    return (_textLayout.getCharacterBox(lastCharacterPosition)?.bottom ?? _textLayout.estimatedLineHeight) -
+        viewportHeight;
   }
 
   @override
@@ -205,7 +206,8 @@ class _TextScrollViewState extends State<TextScrollView>
 
       final characterBox = _textLayout.getCharacterBox(position);
       final scrolledCharacterTop = (characterBox?.top ?? 0.0) - _scrollController.offset;
-      final scrolledCharacterBottom = (characterBox?.bottom ?? _textLayout.estimatedLineHeight) - _scrollController.offset;
+      final scrolledCharacterBottom =
+          (characterBox?.bottom ?? _textLayout.estimatedLineHeight) - _scrollController.offset;
       // Round the top/bottom values to avoid false negatives due to floating point accuracy.
       return scrolledCharacterTop.round() >= 0 && scrolledCharacterBottom.round() <= viewportHeight;
     } else {
@@ -250,8 +252,7 @@ class _TextScrollViewState extends State<TextScrollView>
 
   @override
   Rect getCharacterRectAtPosition(TextPosition position) {
-    return _textLayout.getCharacterBox(position)?.toRect() ?? 
-        Rect.fromLTRB(0, 0, 0, _textLayout.estimatedLineHeight);
+    return _textLayout.getCharacterBox(position)?.toRect() ?? Rect.fromLTRB(0, 0, 0, _textLayout.estimatedLineHeight);
   }
 
   @override
@@ -298,7 +299,8 @@ class _TextScrollViewState extends State<TextScrollView>
     // Note: we nudge the vertical offset down a few pixels to see if we
     // find a text position in the line below.
     final textPositionOneLineDown = _textLayout.getPositionNearestToOffset(Offset(0, bottomOfLastLine + 5));
-    final bottomOfCharacter = (_textLayout.getCharacterBox(textPositionOneLineDown)?.bottom ?? _textLayout.estimatedLineHeight);
+    final bottomOfCharacter =
+        (_textLayout.getCharacterBox(textPositionOneLineDown)?.bottom ?? _textLayout.estimatedLineHeight);
     return bottomOfCharacter;
   }
 

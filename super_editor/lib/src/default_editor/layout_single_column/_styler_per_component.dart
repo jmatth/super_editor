@@ -33,9 +33,9 @@ class SingleColumnLayoutCustomComponentStyler extends SingleColumnLayoutStylePha
   }
 
   SingleColumnLayoutComponentViewModel _applyLayoutStyles(
-      DocumentNode node,
-      SingleColumnLayoutComponentViewModel viewModel,
-      ) {
+    DocumentNode node,
+    SingleColumnLayoutComponentViewModel viewModel,
+  ) {
     final componentStyles = SingleColumnLayoutComponentStyles.fromMetadata(node);
 
     viewModel
@@ -76,11 +76,11 @@ class SingleColumnLayoutComponentStyles {
   }
 
   Map<String, dynamic> toMetadata() => {
-    _metadataKey: {
-      _widthKey: width,
-      _paddingKey: padding,
-    },
-  };
+        _metadataKey: {
+          _widthKey: width,
+          _paddingKey: padding,
+        },
+      };
 
   SingleColumnLayoutComponentStyles copyWith({
     double? width,
@@ -95,10 +95,10 @@ class SingleColumnLayoutComponentStyles {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is SingleColumnLayoutComponentStyles &&
-              runtimeType == other.runtimeType &&
-              width == other.width &&
-              padding == other.padding;
+      other is SingleColumnLayoutComponentStyles &&
+          runtimeType == other.runtimeType &&
+          width == other.width &&
+          padding == other.padding;
 
   @override
   int get hashCode => width.hashCode ^ padding.hashCode;

@@ -49,7 +49,7 @@ void testWidgetsOnAllPlatforms(
   testWidgetsOnWindows("$description (on Windows)", test, skip: skip);
   testWidgetsOnLinux("$description (on Linux)", test, skip: skip);
   testWidgetsOnAndroid("$description (on Android)", test, skip: skip);
-  testWidgetsOnIos("$description (on iOS)", test, skip: skip);  
+  testWidgetsOnIos("$description (on iOS)", test, skip: skip);
 }
 
 /// A widget test that runs a variant for Windows and Linux.

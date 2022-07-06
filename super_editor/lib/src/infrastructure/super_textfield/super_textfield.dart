@@ -202,11 +202,11 @@ class SuperTextFieldState extends State<SuperTextField> {
   }
 
   /// Shortcuts that should be ignored on web.
-  /// 
+  ///
   /// Without this we can't handle space and arrow keys inside [SuperTextField].
-  /// 
+  ///
   /// For exemple, when [SuperTextField] is inside a [ScrollView],
-  /// pressing [LogicalKeyboardKey.space] scrolls the scrollview. 
+  /// pressing [LogicalKeyboardKey.space] scrolls the scrollview.
   final Map<LogicalKeySet, Intent> _scrollShortcutOverrides = kIsWeb
       ? {
           LogicalKeySet(LogicalKeyboardKey.space): DoNothingAndStopPropagationIntent(),

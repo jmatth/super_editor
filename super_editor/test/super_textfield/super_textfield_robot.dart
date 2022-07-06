@@ -42,9 +42,9 @@ extension SuperTextFieldRobot on WidgetTester {
 
   /// Double taps in a [SuperTextField] at the given [offset]
   ///
-  /// {@macro supertextfield_finder} 
+  /// {@macro supertextfield_finder}
   Future<void> doubleTapAtSuperTextField(int offset,
-    [Finder? superTextFieldFinder, TextAffinity affinity = TextAffinity.downstream]) async {
+      [Finder? superTextFieldFinder, TextAffinity affinity = TextAffinity.downstream]) async {
     // TODO: De-duplicate this behavior with placeCaretInSuperTextField
     final fieldFinder = _findInnerPlatformTextField(superTextFieldFinder ?? find.byType(SuperTextField));
     final match = fieldFinder.evaluate().single.widget;
