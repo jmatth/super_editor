@@ -93,7 +93,7 @@ class TextScrollView extends StatefulWidget {
   final Widget child;
 
   @override
-  State createState() => _TextScrollViewState();
+  State<TextScrollView> createState() => _TextScrollViewState();
 }
 
 class _TextScrollViewState extends State<TextScrollView>

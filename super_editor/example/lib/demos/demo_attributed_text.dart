@@ -4,7 +4,7 @@ import 'package:super_text_layout/super_text_layout.dart';
 
 class AttributedTextDemo extends StatefulWidget {
   @override
-  _AttributedTextDemoState createState() => _AttributedTextDemoState();
+  State<AttributedTextDemo> createState() => _AttributedTextDemoState();
 }
 
 class _AttributedTextDemoState extends State<AttributedTextDemo> {
@@ -184,7 +184,7 @@ class TextRangeSelector extends StatefulWidget {
   final void Function(List<SpanRange>)? onRangesChange;
 
   @override
-  _TextRangeSelectorState createState() => _TextRangeSelectorState();
+  State<TextRangeSelector> createState() => _TextRangeSelectorState();
 }
 
 class _TextRangeSelectorState extends State<TextRangeSelector> {

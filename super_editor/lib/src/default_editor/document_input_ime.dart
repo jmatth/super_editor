@@ -67,7 +67,7 @@ class DocumentImeInteractor extends StatefulWidget {
   final Widget child;
 
   @override
-  _DocumentImeInteractorState createState() => _DocumentImeInteractorState();
+  State<DocumentImeInteractor> createState() => _DocumentImeInteractorState();
 }
 
 class _DocumentImeInteractorState extends State<DocumentImeInteractor> implements DeltaTextInputClient {

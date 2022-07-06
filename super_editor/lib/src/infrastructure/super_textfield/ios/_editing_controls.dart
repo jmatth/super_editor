@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:super_editor/src/infrastructure/_listenable_builder.dart';
 import 'package:super_editor/src/infrastructure/_logging.dart';
-import 'package:super_editor/src/infrastructure/super_textfield/infrastructure/toolbar_position_delegate.dart';
 import 'package:super_editor/src/infrastructure/platforms/ios/magnifier.dart';
+import 'package:super_editor/src/infrastructure/super_textfield/infrastructure/toolbar_position_delegate.dart';
 import 'package:super_editor/src/infrastructure/super_textfield/super_textfield.dart';
 import 'package:super_text_layout/super_text_layout.dart';
 
@@ -71,7 +71,7 @@ class IOSEditingControls extends StatefulWidget {
   final Widget Function(BuildContext, IOSEditingOverlayController) popoverToolbarBuilder;
 
   @override
-  _IOSEditingControlsState createState() => _IOSEditingControlsState();
+  State<IOSEditingControls> createState() => _IOSEditingControlsState();
 }
 
 class _IOSEditingControlsState extends State<IOSEditingControls> with WidgetsBindingObserver {
