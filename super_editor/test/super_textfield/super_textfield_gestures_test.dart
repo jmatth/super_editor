@@ -1,8 +1,5 @@
-import 'package:attributed_text/attributed_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:logging/logging.dart';
-import 'package:super_editor/src/infrastructure/super_textfield/super_textfield.dart';
 import 'package:super_editor/super_editor.dart';
 
 import '../test_tools.dart';

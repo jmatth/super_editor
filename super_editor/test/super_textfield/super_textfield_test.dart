@@ -5,7 +5,6 @@ import 'package:super_editor/super_editor.dart';
 import 'package:super_text_layout/super_text_layout.dart';
 
 import '../test_tools.dart';
-import 'super_textfield_robot.dart';
 
 void main() {
   group("SuperTextField", () {
