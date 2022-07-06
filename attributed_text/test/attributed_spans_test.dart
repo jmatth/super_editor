@@ -1,12 +1,9 @@
 import 'package:attributed_text/attributed_text.dart';
-import 'package:attributed_text/src/logging.dart';
-import 'package:logging/logging.dart';
 import 'package:test/test.dart';
 
-import 'test_tools.dart';
-
 void main() {
-  groupWithLogging('Spans', Level.OFF, {attributionsLog}, () {
+  // groupWithLogging('Spans', Level.OFF, {attributionsLog}, () {
+  group('Spans', () {
     group('attribution queries', () {
       test('it expands a span from a given offset', () {
         final spans = AttributedSpans()..addAttribution(newAttribution: ExpectedSpans.bold, start: 3, end: 16);
@@ -155,6 +152,40 @@ void main() {
             ),
           ),
         );
+      });
+    });
+
+    group('getMatchingAttributionsWithin', () {
+      final spans = AttributedSpans(attributions: [
+        AttributionSpan(attribution: ExpectedSpans.bold, start: 3, end: 10),
+        AttributionSpan(attribution: ExpectedSpans.italics, start: 7, end: 15),
+      ]);
+
+      test('query outside any spans', () {
+        final matching = spans.getMatchingAttributionsWithin(attributions: {
+          ExpectedSpans.bold,
+          ExpectedSpans.italics,
+        }, start: 0, end: 2);
+        expect(matching, isEmpty);
+      });
+
+      test('query a single span', () {
+        final matching = spans.getMatchingAttributionsWithin(attributions: {
+          ExpectedSpans.bold,
+          ExpectedSpans.italics,
+        }, start: 3, end: 5);
+        expect(matching, hasLength(1));
+        expect(matching, contains(ExpectedSpans.bold));
+      });
+
+      test('query within multiple spans', () {
+        final matching = spans.getMatchingAttributionsWithin(attributions: {
+          ExpectedSpans.bold,
+          ExpectedSpans.italics,
+        }, start: 6, end: 9);
+        expect(matching, hasLength(2));
+        expect(matching, contains(ExpectedSpans.bold));
+        expect(matching, contains(ExpectedSpans.italics));
       });
     });
 

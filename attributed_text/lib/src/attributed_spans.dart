@@ -87,18 +87,12 @@ class AttributedSpans {
     required int start,
     required int end,
   }) {
-    final matchingAttributions = <Attribution>{};
-    for (int i = start; i <= end; ++i) {
-      for (final attribution in attributions) {
-        final otherAttributions = getAllAttributionsAt(start);
-        for (final otherAttribution in otherAttributions) {
-          if (otherAttribution.id == attribution.id) {
-            matchingAttributions.add(otherAttribution);
-          }
-        }
-      }
-    }
-    return matchingAttributions;
+    final ids = attributions.map((attr) => attr.id).toSet();
+    return getAttributionSpansInRange(
+      attributionFilter: (attr) => ids.contains(attr.id),
+      start: start,
+      end: end,
+    ).map((span) => span.attribution).toSet();
   }
 
   /// Returns `true` if the given [offset] has the given [attribution].
