@@ -609,9 +609,9 @@ class _EditorToolbarState extends State<EditorToolbar> {
                   maxLines: 1,
                   hintBehavior: HintBehavior.displayHintUntilTextEntered,
                   hintBuilder: (context) {
-                    return Text(
+                    return const Text(
                       "enter a url...",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.grey,
                         fontSize: 16,
                       ),
