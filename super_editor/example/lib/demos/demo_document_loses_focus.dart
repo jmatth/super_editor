@@ -7,7 +7,7 @@ import 'package:super_editor/super_editor.dart';
 // TODO: Add widget tests for focus interaction verifications
 class LoseFocusDemo extends StatefulWidget {
   @override
-  _LoseFocusDemoState createState() => _LoseFocusDemoState();
+  State<LoseFocusDemo> createState() => _LoseFocusDemoState();
 }
 
 class _LoseFocusDemoState extends State<LoseFocusDemo> {

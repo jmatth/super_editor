@@ -30,11 +30,11 @@ packages:
     source: hosted
     version: "2.8.2"
   attributed_text:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: attributed_text
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../../attributed_text"
+      relative: true
+    source: path
     version: "0.1.3"
   boolean_selector:
     dependency: transitive
@@ -146,6 +146,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  flutter_lints:
+    dependency: "direct dev"
+    description:
+      name: flutter_lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -231,6 +238,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.0"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   logging:
     dependency: "direct main"
     description:
@@ -466,7 +480,7 @@ packages:
       path: "../../super_editor_markdown"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   super_text_layout:
     dependency: "direct main"
     description:
@@ -573,5 +587,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
+  dart: ">=2.17.0-206.0.dev <3.0.0"
   flutter: ">=2.10.0-0"

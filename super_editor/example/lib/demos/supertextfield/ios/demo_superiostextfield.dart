@@ -7,7 +7,7 @@ import '../_mobile_textfield_demo.dart';
 /// Demo of [SuperIOSTextField].
 class SuperIOSTextFieldDemo extends StatefulWidget {
   @override
-  _SuperIOSTextFieldDemoState createState() => _SuperIOSTextFieldDemoState();
+  State<SuperIOSTextFieldDemo> createState() => _SuperIOSTextFieldDemoState();
 }
 
 class _SuperIOSTextFieldDemoState extends State<SuperIOSTextFieldDemo> {

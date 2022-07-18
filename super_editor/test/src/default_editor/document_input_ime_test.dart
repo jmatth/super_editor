@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:logging/logging.dart';
 import 'package:super_editor/super_editor.dart';
 
-import '../_document_test_tools.dart';
 import '../../super_editor/test_documents.dart';
+import '../_document_test_tools.dart';
 
 void main() {
   group('IME input', () {

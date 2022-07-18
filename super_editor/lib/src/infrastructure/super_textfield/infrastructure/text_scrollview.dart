@@ -93,7 +93,7 @@ class TextScrollView extends StatefulWidget {
   final Widget child;
 
   @override
-  State createState() => _TextScrollViewState();
+  State<TextScrollView> createState() => _TextScrollViewState();
 }
 
 class _TextScrollViewState extends State<TextScrollView>
@@ -355,7 +355,7 @@ class _TextScrollViewState extends State<TextScrollView>
     if (maxHeight != null && estimatedContentHeight >= maxHeight) {
       _log.finer(' - setting viewport height to maxHeight');
       viewportHeight = maxHeight;
-    } else if (minHeight != null && estimatedContentHeight <= minHeight) {
+    } else if (estimatedContentHeight <= minHeight) {
       _log.finer(' - setting viewport height to minHeight');
       viewportHeight = minHeight;
     }
@@ -865,7 +865,7 @@ class TextScrollController with ChangeNotifier {
   void _ensureRectIsVisible(Rect rect) {
     assert(_delegate != null);
 
-    _log.finer('Ensuring rect is visible: $rect');   
+    _log.finer('Ensuring rect is visible: $rect');
     if (_delegate!.isMultiline) {
       if (rect.top < 0) {
         // The character is entirely or partially above the top of the viewport.
@@ -879,12 +879,12 @@ class TextScrollController with ChangeNotifier {
         _log.finer(' - updated _scrollOffset to $_scrollOffset');
       }
     } else {
-      if(rect.left < 0) {
+      if (rect.left < 0) {
         // The character is entirely or partially before the start of the viewport.
         // Scroll the content right.
         _scrollOffset = rect.left;
         _log.finer(' - updated _scrollOffset to $_scrollOffset');
-      } else if (rect.right > _delegate!.viewportWidth!){
+      } else if (rect.right > _delegate!.viewportWidth!) {
         // The character is entirely or partially after the end of the viewport.
         // Scroll the content left.
         _scrollOffset = rect.right - _delegate!.viewportWidth!;

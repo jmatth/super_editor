@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:attributed_text/attributed_text.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide SelectableText;
 import 'package:flutter/services.dart';
 import 'package:super_editor/src/core/document.dart';
@@ -329,7 +328,7 @@ class TextWithHintComponent extends StatefulWidget {
   final bool showDebugPaint;
 
   @override
-  State createState() => _TextWithHintComponentState();
+  State<TextWithHintComponent> createState() => _TextWithHintComponentState();
 }
 
 class _TextWithHintComponentState extends State<TextWithHintComponent>
@@ -508,54 +507,54 @@ class TextComponentState extends State<TextComponent> with DocumentComponent imp
   }
 
   @override
-  TextNodePosition? movePositionLeft(NodePosition textPosition, [MovementModifier? movementModifier]) {
-    if (textPosition is! TextNodePosition) {
+  TextNodePosition? movePositionLeft(NodePosition currentPosition, [MovementModifier? movementModifier]) {
+    if (currentPosition is! TextNodePosition) {
       // We don't know how to interpret a non-text position.
       return null;
     }
 
-    if (textPosition.offset > widget.text.text.length) {
+    if (currentPosition.offset > widget.text.text.length) {
       // This text position does not represent a position within our text.
       return null;
     }
 
-    if (textPosition.offset == 0) {
+    if (currentPosition.offset == 0) {
       // Can't move any further left.
       return null;
     }
 
     if (movementModifier == MovementModifier.line) {
       return getPositionAtStartOfLine(
-        TextNodePosition(offset: textPosition.offset),
+        TextNodePosition(offset: currentPosition.offset),
       );
     } else if (movementModifier == MovementModifier.word) {
-      final newOffset = getAllText().moveOffsetUpstreamByWord(textPosition.offset);
+      final newOffset = getAllText().moveOffsetUpstreamByWord(currentPosition.offset);
       if (newOffset == null) {
-        return textPosition;
+        return currentPosition;
       }
 
       return TextNodePosition(offset: newOffset);
     }
 
-    final newOffset = getAllText().moveOffsetUpstreamByCharacter(textPosition.offset);
-    return newOffset != null ? TextNodePosition(offset: newOffset) : textPosition;
+    final newOffset = getAllText().moveOffsetUpstreamByCharacter(currentPosition.offset);
+    return newOffset != null ? TextNodePosition(offset: newOffset) : currentPosition;
   }
 
   @override
-  TextNodePosition? movePositionRight(NodePosition textPosition, [MovementModifier? movementModifier]) {
-    if (textPosition is! TextNodePosition) {
+  TextNodePosition? movePositionRight(NodePosition currentPosition, [MovementModifier? movementModifier]) {
+    if (currentPosition is! TextNodePosition) {
       // We don't know how to interpret a non-text position.
       return null;
     }
 
-    if (textPosition.offset >= widget.text.text.length) {
+    if (currentPosition.offset >= widget.text.text.length) {
       // Can't move further right.
       return null;
     }
 
     if (movementModifier == MovementModifier.line) {
       final endOfLine = getPositionAtEndOfLine(
-        TextNodePosition(offset: textPosition.offset),
+        TextNodePosition(offset: currentPosition.offset),
       );
 
       final TextPosition endPosition = getEndPosition();
@@ -580,31 +579,31 @@ class TextComponentState extends State<TextComponent> with DocumentComponent imp
           : TextNodePosition.fromTextPosition(endOfLine);
     }
     if (movementModifier != null && movementModifier == MovementModifier.word) {
-      final newOffset = getAllText().moveOffsetDownstreamByWord(textPosition.offset);
+      final newOffset = getAllText().moveOffsetDownstreamByWord(currentPosition.offset);
       if (newOffset == null) {
-        return textPosition;
+        return currentPosition;
       }
 
       return TextNodePosition(offset: newOffset);
     }
 
-    final newOffset = getAllText().moveOffsetDownstreamByCharacter(textPosition.offset);
-    return newOffset != null ? TextNodePosition(offset: newOffset) : textPosition;
+    final newOffset = getAllText().moveOffsetDownstreamByCharacter(currentPosition.offset);
+    return newOffset != null ? TextNodePosition(offset: newOffset) : currentPosition;
   }
 
   @override
-  TextNodePosition? movePositionUp(NodePosition textNodePosition) {
-    if (textNodePosition is! TextNodePosition) {
+  TextNodePosition? movePositionUp(NodePosition currentPosition) {
+    if (currentPosition is! TextNodePosition) {
       // We don't know how to interpret a non-text position.
       return null;
     }
 
-    if (textNodePosition.offset < 0 || textNodePosition.offset > widget.text.text.length) {
+    if (currentPosition.offset < 0 || currentPosition.offset > widget.text.text.length) {
       // This text position does not represent a position within our text.
       return null;
     }
 
-    final positionOneLineUp = getPositionOneLineUp(textNodePosition);
+    final positionOneLineUp = getPositionOneLineUp(currentPosition);
     if (positionOneLineUp == null) {
       return null;
     }
@@ -612,18 +611,18 @@ class TextComponentState extends State<TextComponent> with DocumentComponent imp
   }
 
   @override
-  TextNodePosition? movePositionDown(NodePosition textNodePosition) {
-    if (textNodePosition is! TextNodePosition) {
+  TextNodePosition? movePositionDown(NodePosition currentPosition) {
+    if (currentPosition is! TextNodePosition) {
       // We don't know how to interpret a non-text position.
       return null;
     }
 
-    if (textNodePosition.offset < 0 || textNodePosition.offset > widget.text.text.length) {
+    if (currentPosition.offset < 0 || currentPosition.offset > widget.text.text.length) {
       // This text position does not represent a position within our text.
       return null;
     }
 
-    final positionOneLineDown = getPositionOneLineDown(textNodePosition);
+    final positionOneLineDown = getPositionOneLineDown(currentPosition);
     if (positionOneLineDown == null) {
       return null;
     }
@@ -646,12 +645,12 @@ class TextComponentState extends State<TextComponent> with DocumentComponent imp
   }
 
   @override
-  TextNodeSelection getCollapsedSelectionAt(NodePosition textNodePosition) {
-    if (textNodePosition is! TextNodePosition) {
-      throw Exception('The given node position ($textNodePosition) is not compatible with TextComponent');
+  TextNodeSelection getCollapsedSelectionAt(NodePosition nodePosition) {
+    if (nodePosition is! TextNodePosition) {
+      throw Exception('The given node position ($nodePosition) is not compatible with TextComponent');
     }
 
-    return TextNodeSelection.collapsed(offset: textNodePosition.offset);
+    return TextNodeSelection.collapsed(offset: nodePosition.offset);
   }
 
   @override

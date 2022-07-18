@@ -80,7 +80,7 @@ class IOSDocumentTouchInteractor extends StatefulWidget {
   final Widget child;
 
   @override
-  State createState() => _IOSDocumentTouchInteractorState();
+  State<IOSDocumentTouchInteractor> createState() => _IOSDocumentTouchInteractorState();
 }
 
 class _IOSDocumentTouchInteractorState extends State<IOSDocumentTouchInteractor>
@@ -1173,7 +1173,7 @@ class IosDocumentTouchEditingControls extends StatefulWidget {
   final bool showDebugPaint;
 
   @override
-  State createState() => _IosDocumentTouchEditingControlsState();
+  State<IosDocumentTouchEditingControls> createState() => _IosDocumentTouchEditingControlsState();
 }
 
 class _IosDocumentTouchEditingControlsState extends State<IosDocumentTouchEditingControls>

@@ -1,6 +1,78 @@
 name: Test project in a PR
 on: [pull_request]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the PR branch
+      - uses: actions/checkout@v3
+
+      # Setup Flutter environment
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies (super_editor)
+        run: flutter pub get
+        working-directory: super_editor
+
+      - name: Check formatting (super_editor)
+        run: flutter format --line-length 120 --output=none --set-exit-if-changed .
+        working-directory: super_editor
+
+      - name: Run static analysis (super_editor)
+        run: flutter analyze
+        working-directory: super_editor
+
+      - name: Install dependencies (attributed_text)
+        run: flutter pub get
+        working-directory: attributed_text
+
+      - name: Check formatting (attributed_text)
+        run: flutter format --line-length 120 --output=none --set-exit-if-changed .
+        working-directory: attributed_text
+
+      - name: Run static analysis (attributed_text)
+        run: flutter analyze
+        working-directory: attributed_text
+
+      - name: Install dependencies (super_editor_markdown)
+        run: flutter pub get
+        working-directory: super_editor_markdown
+
+      - name: Check formatting (super_editor_markdown)
+        run: flutter format --line-length 120 --output=none --set-exit-if-changed .
+        working-directory: super_editor_markdown
+
+      - name: Run static analysis (super_editor_markdown)
+        run: flutter analyze
+        working-directory: super_editor_markdown
+
+      - name: Install dependencies (super_text_layout)
+        run: flutter pub get
+        working-directory: super_text_layout
+
+      - name: Check formatting (super_text_layout)
+        run: flutter format --line-length 120 --output=none --set-exit-if-changed .
+        working-directory: super_text_layout
+
+      - name: Run static analysis (super_text_layout)
+        run: flutter analyze
+        working-directory: super_text_layout
+
+      - name: Install dependencies (website)
+        run: flutter pub get
+        working-directory: website
+
+      - name: Check formatting (website)
+        run: flutter format --line-length 120 --output=none --set-exit-if-changed .
+        working-directory: website
+
+      - name: Run static analysis (website)
+        run: flutter analyze
+        working-directory: website
+
   test_mac:
     runs-on: macos-latest
     defaults:
@@ -110,9 +182,6 @@ jobs:
       # Download all the packages that the app uses
       - run: flutter pub get
 
-      # Enforce static analysis
-      - run: flutter analyze
-
       # Run all tests
       - run: flutter test
 
@@ -151,9 +220,6 @@ jobs:
 
       # Install app dependencies
       - run: dart pub get
-
-      # Enforce static analysis
-      - run: dart analyze
 
       # Run all tests
       - run: dart test

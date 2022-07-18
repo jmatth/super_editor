@@ -33,7 +33,8 @@ void main() {
         expect(selectionOffset.dy.floor(), lessThanOrEqualTo(screenSizeWithKeyboard.height));
 
         // Ensure we scroll only the necessary to reveal the selection, plus a small gap
-        expect(screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
+        expect(
+            screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
 
         // Ensure selection doesn't scroll beyond the top
         expect(selectionOffset.dy.floor(), greaterThanOrEqualTo(0));
@@ -60,7 +61,8 @@ void main() {
         expect(selectionOffset.dy.floor(), lessThanOrEqualTo(screenSizeWithKeyboard.height));
 
         // Ensure we scroll only the necessary to reveal the selection, plus a small gap
-        expect(screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
+        expect(
+            screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
 
         // Ensure selection doesn't scroll beyond the top
         expect(selectionOffset.dy.floor(), greaterThanOrEqualTo(0));
@@ -87,7 +89,8 @@ void main() {
         expect(selectionOffset.dy.floor(), lessThanOrEqualTo(screenSizeWithKeyboard.height));
 
         // Ensure we scroll only the necessary to reveal the selection, plus a small gap
-        expect(screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
+        expect(
+            screenSizeWithKeyboard.height - selectionOffset.dy.floor(), lessThanOrEqualTo(gapBetweenCaretAndKeyboard));
 
         // Ensure selection doesn't scroll beyond the top
         expect(selectionOffset.dy.floor(), greaterThanOrEqualTo(0));
@@ -144,7 +147,7 @@ Future<void> _pumpTestApp(
 
 void testWidgetsOnMobileWithKeyboard(
   String description,
-  Future<void> Function(WidgetTester tester, _KeyboardToggle keyboardToggle) test,
+  Future<void> Function(WidgetTester tester, KeyboardToggle keyboardToggle) test,
 ) {
   testWidgetsOnMobile(description, (tester) async {
     tester.binding.window
@@ -153,7 +156,7 @@ void testWidgetsOnMobileWithKeyboard(
       ..devicePixelRatioTestValue = 1.0;
     addTearDown(() => tester.binding.window.clearAllTestValues());
 
-    final keyboardToggle = _KeyboardToggle(
+    final keyboardToggle = KeyboardToggle(
       tester: tester,
       sizeWithoutKeyboard: screenSizeWithoutKeyboard,
       sizeWithKeyboard: screenSizeWithKeyboard,
@@ -163,8 +166,8 @@ void testWidgetsOnMobileWithKeyboard(
   });
 }
 
-class _KeyboardToggle {
-  _KeyboardToggle({
+class KeyboardToggle {
+  KeyboardToggle({
     required this.tester,
     required this.sizeWithoutKeyboard,
     required this.sizeWithKeyboard,

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:example/logging.dart';
 import 'package:flutter/material.dart';
-import 'package:super_editor/super_editor.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:super_editor/super_editor.dart';
 
 /// Small toolbar that is intended to display near some selected
 /// text and offer a few text formatting controls.
@@ -49,7 +49,7 @@ class EditorToolbar extends StatefulWidget {
   final VoidCallback closeToolbar;
 
   @override
-  _EditorToolbarState createState() => _EditorToolbarState();
+  State<EditorToolbar> createState() => _EditorToolbarState();
 }
 
 class _EditorToolbarState extends State<EditorToolbar> {
@@ -609,9 +609,9 @@ class _EditorToolbarState extends State<EditorToolbar> {
                   maxLines: 1,
                   hintBehavior: HintBehavior.displayHintUntilTextEntered,
                   hintBuilder: (context) {
-                    return Text(
+                    return const Text(
                       "enter a url...",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.grey,
                         fontSize: 16,
                       ),
@@ -715,7 +715,7 @@ class ImageFormatToolbar extends StatefulWidget {
   final VoidCallback closeToolbar;
 
   @override
-  _ImageFormatToolbarState createState() => _ImageFormatToolbarState();
+  State<ImageFormatToolbar> createState() => _ImageFormatToolbarState();
 }
 
 class _ImageFormatToolbarState extends State<ImageFormatToolbar> {

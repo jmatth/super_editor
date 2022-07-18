@@ -128,7 +128,9 @@ class SuperIOSTextField extends StatefulWidget {
   State createState() => SuperIOSTextFieldState();
 }
 
-class SuperIOSTextFieldState extends State<SuperIOSTextField> with TickerProviderStateMixin, WidgetsBindingObserver implements ProseTextBlock {
+class SuperIOSTextFieldState extends State<SuperIOSTextField>
+    with TickerProviderStateMixin, WidgetsBindingObserver
+    implements ProseTextBlock {
   static const Duration _autoScrollAnimationDuration = Duration(milliseconds: 100);
   static const Curve _autoScrollAnimationCurve = Curves.fastOutSlowIn;
 
@@ -411,7 +413,7 @@ class SuperIOSTextFieldState extends State<SuperIOSTextField> with TickerProvide
     final fieldBox = context.findRenderObject() as RenderBox;
 
     // The area of the text field that should be revealed.
-    // We add a small margin to leave some space between the text field and the keyboard.    
+    // We add a small margin to leave some space between the text field and the keyboard.
     final textFieldFocalRect = Rect.fromLTWH(
       textFieldFocalPoint.dx,
       textFieldFocalPoint.dy,

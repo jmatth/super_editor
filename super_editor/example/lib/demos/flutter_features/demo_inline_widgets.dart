@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 
 class TextInlineWidgetDemo extends StatefulWidget {
   @override
-  _TextInlineWidgetDemoState createState() => _TextInlineWidgetDemoState();
+  State<TextInlineWidgetDemo> createState() => _TextInlineWidgetDemoState();
 }
 
 class _TextInlineWidgetDemoState extends State<TextInlineWidgetDemo> {
