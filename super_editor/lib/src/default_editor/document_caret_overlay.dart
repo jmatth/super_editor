@@ -26,7 +26,8 @@ class CaretDocumentOverlay extends StatefulWidget {
   State<CaretDocumentOverlay> createState() => _CaretDocumentOverlayState();
 }
 
-class _CaretDocumentOverlayState extends State<CaretDocumentOverlay> with SingleTickerProviderStateMixin {
+class _CaretDocumentOverlayState extends State<CaretDocumentOverlay>
+    with SingleTickerProviderStateMixin {
   final _caret = ValueNotifier<Rect?>(null);
   late final BlinkController _blinkController;
   BoxConstraints? _previousConstraints;
@@ -35,7 +36,8 @@ class _CaretDocumentOverlayState extends State<CaretDocumentOverlay> with Single
   void initState() {
     super.initState();
     widget.composer.selectionNotifier.addListener(_onSelectionChange);
-    _blinkController = BlinkController(tickerProvider: this)..startBlinking();
+    _blinkController = BlinkController(tickerProvider: this);
+    _blinkController.isBlinkingEnabled = false;
   }
 
   @override
@@ -95,7 +97,8 @@ class _CaretDocumentOverlayState extends State<CaretDocumentOverlay> with Single
           // size/constraints. We need to re-calculate the caret offset when the
           // constraints change.
           return LayoutBuilder(builder: (context, constraints) {
-            if (_previousConstraints != null && constraints != _previousConstraints) {
+            if (_previousConstraints != null &&
+                constraints != _previousConstraints) {
               // Use a post-frame callback to avoid calling setState() during build.
               WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                 _updateCaretOffset();
@@ -118,7 +121,8 @@ class _CaretDocumentOverlayState extends State<CaretDocumentOverlay> with Single
                             key: primaryCaretKey,
                             width: widget.caretStyle.width,
                             decoration: BoxDecoration(
-                              color: widget.caretStyle.color.withOpacity(_blinkController.opacity),
+                              color: widget.caretStyle.color
+                                  .withOpacity(_blinkController.opacity),
                               borderRadius: widget.caretStyle.borderRadius,
                             ),
                           );
