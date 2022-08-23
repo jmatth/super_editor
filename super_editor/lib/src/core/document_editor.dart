@@ -144,7 +144,7 @@ class MutableDocument with ChangeNotifier implements Document {
   final Map<String, int> _nodeIndexCache = HashMap();
 
   @override
-  List<DocumentNode> get nodes => List.unmodifiable(_nodes);
+  List<DocumentNode> get nodes => _nodes;
 
   @override
   DocumentNode? getNodeById(String nodeId) {
@@ -216,17 +216,15 @@ class MutableDocument with ChangeNotifier implements Document {
 
   @override
   List<DocumentNode> getNodesInside(DocumentPosition position1, DocumentPosition position2) {
-    final node1 = getNode(position1);
-    if (node1 == null) {
+    final index1 = getNodeIndexById(position1.nodeId);
+    if (index1 < 0) {
       throw Exception('No such position in document: $position1');
     }
-    final index1 = _nodes.indexOf(node1);
 
-    final node2 = getNode(position2);
-    if (node2 == null) {
+    final index2 = getNodeIndexById(position2.nodeId);
+    if (index2 < 0) {
       throw Exception('No such position in document: $position2');
     }
-    final index2 = _nodes.indexOf(node2);
 
     final from = min(index1, index2);
     final to = max(index1, index2);
