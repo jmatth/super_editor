@@ -4,7 +4,7 @@ List<DocumentNode> frankNodes() {
   return frank
       .split('\n')
       .where((line) => line.isNotEmpty)
-      .map((line) => ParagraphNode(
+      .map<DocumentNode>((line) => ParagraphNode(
           id: DocumentEditor.createNodeId(), text: AttributedText(text: line)))
       .toList();
 }
