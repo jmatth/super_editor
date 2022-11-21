@@ -193,16 +193,14 @@ class AttributedText {
   AttributedText copyText(int startOffset, [int? endOffset]) {
     _log.fine('start: $startOffset, end: $endOffset');
 
-    // Note: -1 because copyText() uses an exclusive `start` and `end` but
-    // _copyAttributionRegion() uses an inclusive `start` and `end`.
     final startCopyOffset = startOffset < text.length ? startOffset : text.length - 1;
     int endCopyOffset;
     if (endOffset == startOffset) {
       endCopyOffset = startCopyOffset;
     } else if (endOffset != null) {
-      endCopyOffset = endOffset - 1;
+      endCopyOffset = endOffset;
     } else {
-      endCopyOffset = text.length - 1;
+      endCopyOffset = text.length;
     }
     _log.fine('offsets, start: $startCopyOffset, end: $endCopyOffset');
 
@@ -276,7 +274,7 @@ class AttributedText {
     final insertedText = AttributedText(
       text: textToInsert,
     );
-    final insertTextRange = SpanRange(start: 0, end: textToInsert.length - 1);
+    final insertTextRange = SpanRange(start: 0, end: textToInsert.length);
     for (dynamic attribution in applyAttributions) {
       insertedText.addAttribution(attribution, insertTextRange);
     }

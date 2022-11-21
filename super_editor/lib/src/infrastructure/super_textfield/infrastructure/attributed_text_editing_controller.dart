@@ -119,7 +119,7 @@ class AttributedTextEditingController with ChangeNotifier {
     for (final attribution in attributions) {
       _text.toggleAttribution(
         attribution,
-        SpanRange(start: selection.start, end: selection.end - 1),
+        SpanRange(start: selection.start, end: selection.end),
       );
     }
 
@@ -133,7 +133,7 @@ class AttributedTextEditingController with ChangeNotifier {
     }
 
     _text.clearAttributions(
-      SpanRange(start: selection.start, end: selection.end - 1),
+      SpanRange(start: selection.start, end: selection.end),
     );
 
     notifyListeners();
