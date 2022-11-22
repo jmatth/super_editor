@@ -156,8 +156,8 @@ This is some code
               text: 'This is a paragraph.',
               spans: AttributedSpans(
                 attributions: const [
-                  const AttributionSpan(attribution: boldAttribution, start: 0, end: 7),
-                  const AttributionSpan(attribution: italicsAttribution, start: 8, end: 20),
+                  AttributionSpan(attribution: boldAttribution, start: 0, end: 7),
+                  AttributionSpan(attribution: italicsAttribution, start: 8, end: 20),
                 ],
               ),
             ),
@@ -1082,8 +1082,7 @@ Paragraph4""";
       });
 
       test('paragraph beginning with multiple blank lines', () {
-        final doc =
-            deserializeMarkdownToDocument('  \n  \nFirst Paragraph.\n\nSecond Paragraph');
+        final doc = deserializeMarkdownToDocument('  \n  \nFirst Paragraph.\n\nSecond Paragraph');
 
         expect(doc.nodes.length, 2);
 
@@ -1093,7 +1092,7 @@ Paragraph4""";
         expect(doc.nodes.last, isA<ParagraphNode>());
         expect((doc.nodes.last as ParagraphNode).text.text, 'Second Paragraph');
       });
-    
+
       test('document ending with an empty paragraph', () {
         final doc = deserializeMarkdownToDocument("""
 First Paragraph.

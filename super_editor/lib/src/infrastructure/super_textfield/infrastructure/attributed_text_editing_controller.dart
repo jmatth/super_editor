@@ -583,7 +583,7 @@ class AttributedTextEditingController with ChangeNotifier {
       text: updatedText,
       selection: updatedSelection,
     );
-    
+
     _updateComposingAttributions();
     // TODO: do we need to implement composing region update behavior like selections?
     composingRegion = newComposingRegion ?? TextRange.empty;

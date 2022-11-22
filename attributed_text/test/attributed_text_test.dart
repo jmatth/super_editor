@@ -214,7 +214,9 @@ void main() {
         expect(range, SpanRange(start: 4, end: 7));
       });
 
-      test('finds all bold, italic and strikethrough text within a word that also includes a span with only bold and italics', () {
+      test(
+          'finds all bold, italic and strikethrough text within a word that also includes a span with only bold and italics',
+          () {
         final attributedText = AttributedText(
           text: 'Hello world',
           spans: AttributedSpans(
@@ -238,7 +240,8 @@ void main() {
           ),
         );
 
-        final range = attributedText.getAttributedRange({ExpectedSpans.bold, ExpectedSpans.italics, ExpectedSpans.strikethrough}, 2);
+        final range = attributedText
+            .getAttributedRange({ExpectedSpans.bold, ExpectedSpans.italics, ExpectedSpans.strikethrough}, 2);
         expect(range, SpanRange(start: 1, end: 3));
       });
     });

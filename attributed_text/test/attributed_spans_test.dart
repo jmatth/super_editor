@@ -847,7 +847,8 @@ class _LinkAttribution implements Attribution {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is _LinkAttribution && runtimeType == other.runtimeType && url == other.url;
+  bool operator ==(Object other) =>
+      identical(this, other) || other is _LinkAttribution && runtimeType == other.runtimeType && url == other.url;
 
   @override
   int get hashCode => url.hashCode;
