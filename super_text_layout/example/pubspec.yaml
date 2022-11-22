@@ -1,4 +1,4 @@
-name: example
+name: super_text_layout_example
 description: Super Text Layout example app
 
 publish_to: 'none'
@@ -11,9 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  super_text_layout: any
 
+dependency_overrides:
+  # Override dependencies within the monorepo. These need to go here otherwise
+  # version solving can break when an internal package depends on the pub-hosted
+  # version of another internal package, such as how super_editor_markdown
+  # depends on super_editor.
   super_text_layout:
     path: ../
+  attributed_text:
+    path: ../../attributed_text
 
 dev_dependencies:
   flutter_test:
